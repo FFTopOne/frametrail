@@ -1,0 +1,68 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "FFTopOne/frametrail"
+
+import {
+  "moonbitlang/core/debug",
+}
+
+// Values
+pub fn cobs_decode(Bytes) -> Result[Bytes, Int]
+
+pub fn cobs_encode(Bytes) -> Bytes
+
+pub fn crc16(Bytes) -> Int
+
+pub fn encode_frame(Bytes) -> Bytes
+
+pub fn parse_hex(String) -> Result[Bytes, String]
+
+pub fn replay(Bytes, chunk_size? : Int, max_encoded? : Int) -> Result[(Array[Event], Stats), String]
+
+pub fn to_hex(Bytes) -> String
+
+// Errors
+
+// Types and methods
+type Decoder
+pub fn Decoder::buffered(Self) -> Int
+pub fn Decoder::feed(Self, Bytes) -> Result[Array[Event], String]
+pub fn Decoder::finish(Self) -> Array[Event]
+pub fn Decoder::new(max_encoded? : Int) -> Result[Self, String]
+pub fn Decoder::stats(Self) -> Stats
+
+pub(all) enum Event {
+  Frame(start~ : Int64, end~ : Int64, payload~ : Bytes)
+  Rejected(start~ : Int64, end~ : Int64, reason~ : Fault)
+} derive(Eq, @debug.Debug)
+pub fn Event::as_json(Self) -> Json
+pub fn Event::equal(Self, Self) -> Bool
+pub fn Event::not_equal(Self, Self) -> Bool
+pub fn Event::to_repr(Self) -> @debug.Repr
+
+pub(all) enum Fault {
+  MalformedCobs
+  MissingChecksum
+  ChecksumMismatch
+  Oversize
+  Truncated
+} derive(Eq, @debug.Debug)
+pub fn Fault::code(Self) -> String
+pub fn Fault::equal(Self, Self) -> Bool
+pub fn Fault::not_equal(Self, Self) -> Bool
+pub fn Fault::to_repr(Self) -> @debug.Repr
+
+pub(all) struct Stats {
+  bytes_in : Int64
+  frames : Int64
+  rejected : Int64
+  empty_delimiters : Int64
+  peak_buffered : Int
+} derive(Eq, ToJson, @debug.Debug)
+pub fn Stats::equal(Self, Self) -> Bool
+pub fn Stats::not_equal(Self, Self) -> Bool
+pub fn Stats::to_json(Self) -> Json
+pub fn Stats::to_repr(Self) -> @debug.Repr
+
+// Type aliases
+
+// Traits

@@ -1,0 +1,32 @@
+{
+  "profile": "frametrail-cobs-crc16-v1",
+  "events": [
+    {
+      "type": "frame",
+      "start": "0",
+      "end": "13",
+      "payload_hex": "54454D503D32332E35",
+      "payload_bytes": 9
+    },
+    {
+      "type": "rejected",
+      "start": "13",
+      "end": "18",
+      "code": "CRC_MISMATCH"
+    },
+    {
+      "type": "frame",
+      "start": "18",
+      "end": "31",
+      "payload_hex": "54454D503D32332E36",
+      "payload_bytes": 9
+    }
+  ],
+  "stats": {
+    "bytes_in": "31",
+    "frames": "2",
+    "rejected": "1",
+    "empty_delimiters": "0",
+    "peak_buffered": 12
+  }
+}

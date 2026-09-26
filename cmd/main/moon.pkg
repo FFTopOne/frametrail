@@ -1,0 +1,12 @@
+import {
+  "FFTopOne/frametrail" @lib,
+  "moonbitlang/core/env",
+}
+
+supported_targets = "js"
+
+pkgtype(kind: "executable")
+
+options(
+  link: { "js": { "format": "cjs" } },
+)
