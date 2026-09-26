@@ -14,6 +14,10 @@ pub fn crc16(Bytes) -> Int
 
 pub fn encode_frame(Bytes) -> Bytes
 
+pub fn encode_frame_checked(Bytes, max_encoded? : Int) -> Result[Bytes, String]
+
+pub fn max_frame_size(Int) -> Result[Int, String]
+
 pub fn parse_hex(String) -> Result[Bytes, String]
 
 pub fn replay(Bytes, chunk_size? : Int, max_encoded? : Int) -> Result[(Array[Event], Stats), String]
