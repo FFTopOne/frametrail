@@ -15,14 +15,6 @@ function _M0DTPC16result6ResultGisE2Ok(param0) {
   this._0 = param0;
 }
 _M0DTPC16result6ResultGisE2Ok.prototype.$tag = 1;
-function _M0DTPC16result6ResultGzsE3Err(param0) {
-  this._0 = param0;
-}
-_M0DTPC16result6ResultGzsE3Err.prototype.$tag = 0;
-function _M0DTPC16result6ResultGzsE2Ok(param0) {
-  this._0 = param0;
-}
-_M0DTPC16result6ResultGzsE2Ok.prototype.$tag = 1;
 function _M0DTPC16result6ResultGziE3Err(param0) {
   this._0 = param0;
 }
@@ -218,6 +210,20 @@ function _M0DTPC16result6ResultGRPB5ArrayGRP28FFTopOne10frametrail5EventEsE2Ok(p
   this._0 = param0;
 }
 _M0DTPC16result6ResultGRPB5ArrayGRP28FFTopOne10frametrail5EventEsE2Ok.prototype.$tag = 1;
+function _M0DTPC16result6ResultGzRP28FFTopOne10frametrail8HexErrorE3Err(param0) {
+  this._0 = param0;
+}
+_M0DTPC16result6ResultGzRP28FFTopOne10frametrail8HexErrorE3Err.prototype.$tag = 0;
+function _M0DTPC16result6ResultGzRP28FFTopOne10frametrail8HexErrorE2Ok(param0) {
+  this._0 = param0;
+}
+_M0DTPC16result6ResultGzRP28FFTopOne10frametrail8HexErrorE2Ok.prototype.$tag = 1;
+function _M0TP28FFTopOne10frametrail8HexError(param0, param1, param2, param3) {
+  this.offset = param0;
+  this.line = param1;
+  this.column = param2;
+  this.message = param3;
+}
 const _M0FP48FFTopOne10frametrail3cmd4main15read__hex__file = (path) => {
    try {
      const fs = require('node:fs');
@@ -232,21 +238,20 @@ const _M0FP092moonbitlang_2fcore_2fbuiltin_2fStringBuilder_24as_24_40moonbitlang
 const _M0MPB4Iter4nextN6constrS9909GUsRPB4JsonEE = 0;
 const _M0MPB4Iter4nextN6constrS9910GUsRPB4JsonEE = 0;
 const _M0MPB4Iter3newN6constrS9917GUsRPB4JsonEE = 0;
-const _M0FP28FFTopOne10frametrail7to__hexN6digitsS42 = "0123456789ABCDEF";
-const _M0MP28FFTopOne10frametrail7Decoder11new_2einnerN6constrS330 = new _M0DTPC16result6ResultGRP28FFTopOne10frametrail7DecodersE3Err("max_encoded must be in 1..1048576");
-const _M0FP017____moonbit__mainN7_2abindS70 = $bytes_literal$0;
-const _M0FP48FFTopOne10frametrail3cmd4main13parse__optionN6constrS104 = new _M0DTPC16result6ResultGisE3Err("options must be positive decimal integers");
-const _M0FP48FFTopOne10frametrail3cmd4main13parse__optionN6constrS105 = new _M0DTPC16result6ResultGisE3Err("options must be positive decimal integers within Int32 range");
-const _M0FP28FFTopOne10frametrail10parse__hexN6constrS344 = new _M0DTPC16result6ResultGzsE3Err("invalid hex character");
-const _M0FP28FFTopOne10frametrail10parse__hexN6constrS345 = new _M0DTPC16result6ResultGzsE3Err("odd number of hex digits");
+const _M0FP28FFTopOne10frametrail7to__hexN6digitsS56 = "0123456789ABCDEF";
+const _M0MP28FFTopOne10frametrail7Decoder11new_2einnerN6constrS359 = new _M0DTPC16result6ResultGRP28FFTopOne10frametrail7DecodersE3Err("max_encoded must be in 1..1048576");
+const _M0FP017____moonbit__mainN7_2abindS71 = $bytes_literal$0;
+const _M0FP28FFTopOne10frametrail20parse__hex__detailedN5tupleS374 = { _0: 0, _1: 1, _2: 1 };
+const _M0FP48FFTopOne10frametrail3cmd4main13parse__optionN6constrS106 = new _M0DTPC16result6ResultGisE3Err("options must be positive decimal integers");
+const _M0FP48FFTopOne10frametrail3cmd4main13parse__optionN6constrS107 = new _M0DTPC16result6ResultGisE3Err("options must be positive decimal integers within Int32 range");
 const _M0FPB4seed = _M0FPB12random__seed();
-const _M0FP28FFTopOne10frametrail12cobs__decodeN6constrS331 = new _M0DTPC16result6ResultGziE3Err(0);
-const _M0FP28FFTopOne10frametrail14decode__packetN6constrS332 = new _M0DTPC16result6ResultGzRP28FFTopOne10frametrail5FaultE3Err(0);
-const _M0FP28FFTopOne10frametrail14decode__packetN6constrS333 = new _M0DTPC16result6ResultGzRP28FFTopOne10frametrail5FaultE3Err(1);
-const _M0FP28FFTopOne10frametrail14decode__packetN6constrS334 = new _M0DTPC16result6ResultGzRP28FFTopOne10frametrail5FaultE3Err(2);
-const _M0MP28FFTopOne10frametrail7Decoder10feed__eachN6constrS337 = new _M0DTPC16result6ResultGusE3Err("decoder is already feeding");
-const _M0MP28FFTopOne10frametrail7Decoder10feed__eachN6constrS338 = new _M0DTPC16result6ResultGusE3Err("decoder is closed");
-const _M0FP28FFTopOne10frametrail14replay_2einnerN6constrS346 = new _M0DTPC16result6ResultGURPB5ArrayGRP28FFTopOne10frametrail5EventERP28FFTopOne10frametrail5StatsEsE3Err("chunk_size must be positive");
+const _M0FP28FFTopOne10frametrail12cobs__decodeN6constrS360 = new _M0DTPC16result6ResultGziE3Err(0);
+const _M0FP28FFTopOne10frametrail14decode__packetN6constrS361 = new _M0DTPC16result6ResultGzRP28FFTopOne10frametrail5FaultE3Err(0);
+const _M0FP28FFTopOne10frametrail14decode__packetN6constrS362 = new _M0DTPC16result6ResultGzRP28FFTopOne10frametrail5FaultE3Err(1);
+const _M0FP28FFTopOne10frametrail14decode__packetN6constrS363 = new _M0DTPC16result6ResultGzRP28FFTopOne10frametrail5FaultE3Err(2);
+const _M0MP28FFTopOne10frametrail7Decoder10feed__eachN6constrS366 = new _M0DTPC16result6ResultGusE3Err("decoder is already feeding");
+const _M0MP28FFTopOne10frametrail7Decoder10feed__eachN6constrS367 = new _M0DTPC16result6ResultGusE3Err("decoder is closed");
+const _M0FP28FFTopOne10frametrail14replay_2einnerN6constrS373 = new _M0DTPC16result6ResultGURPB5ArrayGRP28FFTopOne10frametrail5EventERP28FFTopOne10frametrail5StatsEsE3Err("chunk_size must be positive");
 function _M0FPB13consume4__acc(acc, input) {
   const _p = (acc >>> 0) + ((Math.imul(input, -1028477379) | 0) >>> 0) | 0;
   const _p$2 = 17;
@@ -542,7 +547,7 @@ function _M0MPC16string6String6repeat(self, n) {
 function _M0MPC15array5Array4pushGyE(self, value) {
   _M0MPB7JSArray4push(self, value);
 }
-function _M0MPC15array5Array4pushGRP28FFTopOne10frametrail5EventE(self, value) {
+function _M0MPC15array5Array4pushGRPC14json10WriteFrameE(self, value) {
   _M0MPB7JSArray4push(self, value);
 }
 function _M0MPC13int3Int20next__power__of__two(self) {
@@ -1070,9 +1075,9 @@ function _M0FPC14json13write__indent(buf, cache, level, indent) {
     if (cache.length <= level) {
       if (cache.length >= 1) {
         const _last = cache[cache.length - 1 | 0];
-        _M0MPC15array5Array4pushGRP28FFTopOne10frametrail5EventE(cache, `${_last}${_M0MPC16string6String6repeat(" ", indent)}`);
+        _M0MPC15array5Array4pushGRPC14json10WriteFrameE(cache, `${_last}${_M0MPC16string6String6repeat(" ", indent)}`);
       } else {
-        _M0MPC15array5Array4pushGRP28FFTopOne10frametrail5EventE(cache, "\n");
+        _M0MPC15array5Array4pushGRPC14json10WriteFrameE(cache, "\n");
       }
       continue;
     } else {
@@ -1188,7 +1193,7 @@ function _M0MPC14json4Json17stringify_2einner(self, escape_slash, indent, replac
             if (indent > 0) {
               _M0FPC14json13write__indent(buf, indent_cache, depth, indent);
             }
-            _M0MPC15array5Array4pushGRP28FFTopOne10frametrail5EventE(stack, new _M0DTPC14json10WriteFrame6Object(_M0MPB3Map4iterGsRPB4JsonE(_members), true));
+            _M0MPC15array5Array4pushGRPC14json10WriteFrameE(stack, new _M0DTPC14json10WriteFrame6Object(_M0MPB3Map4iterGsRPB4JsonE(_members), true));
           }
           break;
         }
@@ -1203,7 +1208,7 @@ function _M0MPC14json4Json17stringify_2einner(self, escape_slash, indent, replac
             if (indent > 0) {
               _M0FPC14json13write__indent(buf, indent_cache, depth, indent);
             }
-            _M0MPC15array5Array4pushGRP28FFTopOne10frametrail5EventE(stack, new _M0DTPC14json10WriteFrame5Array(_arr, 0));
+            _M0MPC15array5Array4pushGRPC14json10WriteFrameE(stack, new _M0DTPC14json10WriteFrame5Array(_arr, 0));
           }
           break;
         }
@@ -1246,19 +1251,19 @@ function _M0MPC14json4Json17stringify_2einner(self, escape_slash, indent, replac
   }
   return buf.val;
 }
-function _M0IP28FFTopOne10frametrail5StatsPB6ToJson8to__json(_x_90) {
+function _M0IP28FFTopOne10frametrail5StatsPB6ToJson8to__json(_x_104) {
   const _bind = [];
   const $36$map = _M0MPB3Map3MapGsRPB4JsonE(new _M0TPB9ArrayViewGUsRPB4JsonEE(_bind, 0, 0), undefined);
-  _M0MPB3Map3setGsRPB4JsonE($36$map, "bytes_in", _M0IPC15int645Int64PB6ToJson8to__json(_x_90.bytes_in));
-  _M0MPB3Map3setGsRPB4JsonE($36$map, "frames", _M0IPC15int645Int64PB6ToJson8to__json(_x_90.frames));
-  _M0MPB3Map3setGsRPB4JsonE($36$map, "rejected", _M0IPC15int645Int64PB6ToJson8to__json(_x_90.rejected));
-  _M0MPB3Map3setGsRPB4JsonE($36$map, "empty_delimiters", _M0IPC15int645Int64PB6ToJson8to__json(_x_90.empty_delimiters));
-  _M0MPB3Map3setGsRPB4JsonE($36$map, "peak_buffered", _M0IPC13int3IntPB6ToJson8to__json(_x_90.peak_buffered));
+  _M0MPB3Map3setGsRPB4JsonE($36$map, "bytes_in", _M0IPC15int645Int64PB6ToJson8to__json(_x_104.bytes_in));
+  _M0MPB3Map3setGsRPB4JsonE($36$map, "frames", _M0IPC15int645Int64PB6ToJson8to__json(_x_104.frames));
+  _M0MPB3Map3setGsRPB4JsonE($36$map, "rejected", _M0IPC15int645Int64PB6ToJson8to__json(_x_104.rejected));
+  _M0MPB3Map3setGsRPB4JsonE($36$map, "empty_delimiters", _M0IPC15int645Int64PB6ToJson8to__json(_x_104.empty_delimiters));
+  _M0MPB3Map3setGsRPB4JsonE($36$map, "peak_buffered", _M0IPC13int3IntPB6ToJson8to__json(_x_104.peak_buffered));
   return new _M0DTPB4Json6Object($36$map);
 }
 function _M0MP28FFTopOne10frametrail7Decoder11new_2einner(max_encoded) {
   if (max_encoded < 1 || max_encoded > 1048576) {
-    return _M0MP28FFTopOne10frametrail7Decoder11new_2einnerN6constrS330;
+    return _M0MP28FFTopOne10frametrail7Decoder11new_2einnerN6constrS359;
   }
   return new _M0DTPC16result6ResultGRP28FFTopOne10frametrail7DecodersE2Ok(new _M0TP28FFTopOne10frametrail7Decoder(max_encoded, [], 0n, 0n, false, false, false, 0n, 0n, 0n, 0));
 }
@@ -1267,7 +1272,7 @@ function _M0MP28FFTopOne10frametrail7Decoder5stats(self) {
 }
 function _M0FP28FFTopOne10frametrail12cobs__decode(data) {
   if (data.length === 0) {
-    return _M0FP28FFTopOne10frametrail12cobs__decodeN6constrS331;
+    return _M0FP28FFTopOne10frametrail12cobs__decodeN6constrS360;
   }
   const out = [];
   let i = 0;
@@ -1347,11 +1352,11 @@ function _M0FP28FFTopOne10frametrail14decode__packet(data) {
     const _Ok = _bind;
     raw = _Ok._0;
   } else {
-    return _M0FP28FFTopOne10frametrail14decode__packetN6constrS332;
+    return _M0FP28FFTopOne10frametrail14decode__packetN6constrS361;
   }
   const n = raw.length;
   if (n < 2) {
-    return _M0FP28FFTopOne10frametrail14decode__packetN6constrS333;
+    return _M0FP28FFTopOne10frametrail14decode__packetN6constrS362;
   }
   const payload = _M0MPC15bytes9BytesView9to__owned(_M0MPC15bytes5Bytes21clamped__view_2einner(raw, 0, n - 2 | 0));
   const _tmp = n - 2 | 0;
@@ -1359,16 +1364,16 @@ function _M0FP28FFTopOne10frametrail14decode__packet(data) {
   const _tmp$3 = n - 1 | 0;
   const expected = _tmp$2 | (_tmp$3 >>> 0 < raw.length ? raw[_tmp$3] : $oob());
   if (_M0FP28FFTopOne10frametrail5crc16(payload) !== expected) {
-    return _M0FP28FFTopOne10frametrail14decode__packetN6constrS334;
+    return _M0FP28FFTopOne10frametrail14decode__packetN6constrS363;
   }
   return new _M0DTPC16result6ResultGzRP28FFTopOne10frametrail5FaultE2Ok(payload);
 }
 function _M0MP28FFTopOne10frametrail7Decoder10feed__each(self, chunk, emit) {
   if (self.feeding) {
-    return _M0MP28FFTopOne10frametrail7Decoder10feed__eachN6constrS337;
+    return _M0MP28FFTopOne10frametrail7Decoder10feed__eachN6constrS366;
   }
   if (self.closed) {
-    return _M0MP28FFTopOne10frametrail7Decoder10feed__eachN6constrS338;
+    return _M0MP28FFTopOne10frametrail7Decoder10feed__eachN6constrS367;
   }
   self.feeding = true;
   const _bind = chunk.end - chunk.start | 0;
@@ -1439,7 +1444,7 @@ function _M0MP28FFTopOne10frametrail7Decoder10feed__each(self, chunk, emit) {
 function _M0MP28FFTopOne10frametrail7Decoder4feed(self, chunk) {
   const events = [];
   const _bind = _M0MP28FFTopOne10frametrail7Decoder10feed__each(self, new _M0TPC15bytes9BytesView(chunk, 0, chunk.length), (event) => {
-    _M0MPC15array5Array4pushGRP28FFTopOne10frametrail5EventE(events, event);
+    _M0MPC15array5Array4pushGRPC14json10WriteFrameE(events, event);
   });
   if (_bind.$tag === 0) {
     const _Err = _bind;
@@ -1463,7 +1468,7 @@ function _M0MP28FFTopOne10frametrail7Decoder6finish(self) {
     _tmp = false;
   }
   if (_tmp) {
-    _M0MPC15array5Array4pushGRP28FFTopOne10frametrail5EventE(events, new _M0DTP28FFTopOne10frametrail5Event8Rejected(self.start, self.offset, 4));
+    _M0MPC15array5Array4pushGRPC14json10WriteFrameE(events, new _M0DTP28FFTopOne10frametrail5Event8Rejected(self.start, self.offset, 4));
     self.rejected = BigInt.asUintN(64, self.rejected + 1n);
   }
   _M0MPC15array5Array5clearGyE(self.buffer);
@@ -1540,79 +1545,6 @@ function _M0FP28FFTopOne10frametrail13encode__frame(payload) {
   _M0MPC15array5Array4pushGyE(out, 0);
   return _M0MPC15bytes5Bytes11from__array(new _M0TPB9ArrayViewGyE(out, 0, out.length));
 }
-function _M0FP28FFTopOne10frametrail10parse__hex(text) {
-  const out = [];
-  let high = -1;
-  const _bind = text.length;
-  let _tmp = 0;
-  while (true) {
-    const _string_index = _tmp;
-    if (_string_index < _bind) {
-      let _decoded_next_string_index;
-      let _decoded_char;
-      _L: {
-        const _bind$2 = text.charCodeAt(_string_index);
-        if (_bind$2 >= 55296 && _bind$2 <= 56319 && (_string_index + 1 | 0) < _bind) {
-          const _bind$3 = text.charCodeAt(_string_index + 1 | 0);
-          if (_bind$3 >= 56320 && _bind$3 <= 57343) {
-            const _tmp$2 = _string_index + 2 | 0;
-            const _p = (((Math.imul(_bind$2 - 55296 | 0, 1024) | 0) + _bind$3 | 0) - 56320 | 0) + 65536 | 0;
-            _decoded_next_string_index = _tmp$2;
-            _decoded_char = _p;
-            break _L;
-          } else {
-            const _tmp$2 = _string_index + 1 | 0;
-            const _p = _bind$2;
-            _decoded_next_string_index = _tmp$2;
-            _decoded_char = _p;
-            break _L;
-          }
-        } else {
-          const _tmp$2 = _string_index + 1 | 0;
-          const _p = _bind$2;
-          _decoded_next_string_index = _tmp$2;
-          _decoded_char = _p;
-          break _L;
-        }
-      }
-      _L$2: {
-        const c = _decoded_char;
-        if (c === 32 || (c === 9 || (c === 10 || c === 13))) {
-          break _L$2;
-        }
-        let v;
-        if (c >= 48 && c <= 57) {
-          v = c - 48 | 0;
-        } else {
-          if (c >= 65 && c <= 70) {
-            v = c - 55 | 0;
-          } else {
-            if (c >= 97 && c <= 102) {
-              v = c - 87 | 0;
-            } else {
-              return _M0FP28FFTopOne10frametrail10parse__hexN6constrS344;
-            }
-          }
-        }
-        if (high < 0) {
-          high = v;
-        } else {
-          _M0MPC15array5Array4pushGyE(out, ((Math.imul(high, 16) | 0) + v | 0) & 255);
-          high = -1;
-        }
-        break _L$2;
-      }
-      _tmp = _decoded_next_string_index;
-      continue;
-    } else {
-      break;
-    }
-  }
-  if (high >= 0) {
-    return _M0FP28FFTopOne10frametrail10parse__hexN6constrS345;
-  }
-  return new _M0DTPC16result6ResultGzsE2Ok(_M0MPC15bytes5Bytes11from__array(new _M0TPB9ArrayViewGyE(out, 0, out.length)));
-}
 function _M0FP28FFTopOne10frametrail7to__hex(data) {
   const out = _M0MPB13StringBuilder21StringBuilder_2einner(0);
   const _bind = data.length;
@@ -1623,10 +1555,10 @@ function _M0FP28FFTopOne10frametrail7to__hex(data) {
       const b = data[_];
       const n = b;
       const _tmp$2 = n >> 4;
-      const _p = _M0MPC16uint166UInt168to__char(_tmp$2 >>> 0 < _M0FP28FFTopOne10frametrail7to__hexN6digitsS42.length ? _M0FP28FFTopOne10frametrail7to__hexN6digitsS42.charCodeAt(_tmp$2) : $oob());
+      const _p = _M0MPC16uint166UInt168to__char(_tmp$2 >>> 0 < _M0FP28FFTopOne10frametrail7to__hexN6digitsS56.length ? _M0FP28FFTopOne10frametrail7to__hexN6digitsS56.charCodeAt(_tmp$2) : $oob());
       _M0IPB13StringBuilderPB6Logger11write__char(out, _p === -1 ? $panic() : _p);
       const _tmp$3 = n & 15;
-      const _p$2 = _M0MPC16uint166UInt168to__char(_tmp$3 >>> 0 < _M0FP28FFTopOne10frametrail7to__hexN6digitsS42.length ? _M0FP28FFTopOne10frametrail7to__hexN6digitsS42.charCodeAt(_tmp$3) : $oob());
+      const _p$2 = _M0MPC16uint166UInt168to__char(_tmp$3 >>> 0 < _M0FP28FFTopOne10frametrail7to__hexN6digitsS56.length ? _M0FP28FFTopOne10frametrail7to__hexN6digitsS56.charCodeAt(_tmp$3) : $oob());
       _M0IPB13StringBuilderPB6Logger11write__char(out, _p$2 === -1 ? $panic() : _p$2);
       _tmp = _ + 1 | 0;
       continue;
@@ -1693,7 +1625,7 @@ function _M0MP28FFTopOne10frametrail5Event8as__json(self) {
 }
 function _M0FP28FFTopOne10frametrail14replay_2einner(data, chunk_size, max_encoded) {
   if (chunk_size < 1) {
-    return _M0FP28FFTopOne10frametrail14replay_2einnerN6constrS346;
+    return _M0FP28FFTopOne10frametrail14replay_2einnerN6constrS373;
   }
   const _bind = _M0MP28FFTopOne10frametrail7Decoder11new_2einner(max_encoded);
   let decoder;
@@ -1720,7 +1652,7 @@ function _M0FP28FFTopOne10frametrail14replay_2einner(data, chunk_size, max_encod
           const _ = _tmp;
           if (_ < _bind$3) {
             const e = _batch[_];
-            _M0MPC15array5Array4pushGRP28FFTopOne10frametrail5EventE(events, e);
+            _M0MPC15array5Array4pushGRPC14json10WriteFrameE(events, e);
             _tmp = _ + 1 | 0;
             continue;
           } else {
@@ -1745,7 +1677,7 @@ function _M0FP28FFTopOne10frametrail14replay_2einner(data, chunk_size, max_encod
     const _ = _tmp;
     if (_ < _bind$3) {
       const e = _bind$2[_];
-      _M0MPC15array5Array4pushGRP28FFTopOne10frametrail5EventE(events, e);
+      _M0MPC15array5Array4pushGRPC14json10WriteFrameE(events, e);
       _tmp = _ + 1 | 0;
       continue;
     } else {
@@ -1753,6 +1685,95 @@ function _M0FP28FFTopOne10frametrail14replay_2einner(data, chunk_size, max_encod
     }
   }
   return new _M0DTPC16result6ResultGURPB5ArrayGRP28FFTopOne10frametrail5EventERP28FFTopOne10frametrail5StatsEsE2Ok({ _0: events, _1: _M0MP28FFTopOne10frametrail7Decoder5stats(decoder) });
+}
+function _M0FP28FFTopOne10frametrail20parse__hex__detailed(text) {
+  const out = [];
+  let high = -1;
+  let high_pos = _M0FP28FFTopOne10frametrail20parse__hex__detailedN5tupleS374;
+  let offset = 0;
+  let line = 1;
+  let column = 1;
+  const _bind = text.length;
+  let _tmp = 0;
+  while (true) {
+    const _string_index = _tmp;
+    if (_string_index < _bind) {
+      let _decoded_next_string_index;
+      let _decoded_char;
+      _L: {
+        const _bind$2 = text.charCodeAt(_string_index);
+        if (_bind$2 >= 55296 && _bind$2 <= 56319 && (_string_index + 1 | 0) < _bind) {
+          const _bind$3 = text.charCodeAt(_string_index + 1 | 0);
+          if (_bind$3 >= 56320 && _bind$3 <= 57343) {
+            const _tmp$2 = _string_index + 2 | 0;
+            const _p = (((Math.imul(_bind$2 - 55296 | 0, 1024) | 0) + _bind$3 | 0) - 56320 | 0) + 65536 | 0;
+            _decoded_next_string_index = _tmp$2;
+            _decoded_char = _p;
+            break _L;
+          } else {
+            const _tmp$2 = _string_index + 1 | 0;
+            const _p = _bind$2;
+            _decoded_next_string_index = _tmp$2;
+            _decoded_char = _p;
+            break _L;
+          }
+        } else {
+          const _tmp$2 = _string_index + 1 | 0;
+          const _p = _bind$2;
+          _decoded_next_string_index = _tmp$2;
+          _decoded_char = _p;
+          break _L;
+        }
+      }
+      _L$2: {
+        const c = _decoded_char;
+        const _bind$2 = offset;
+        const _bind$3 = line;
+        const _bind$4 = column;
+        const pos = { _0: _bind$2, _1: _bind$3, _2: _bind$4 };
+        offset = offset + 1 | 0;
+        if (c === 10) {
+          line = line + 1 | 0;
+          column = 1;
+        } else {
+          column = column + 1 | 0;
+        }
+        if (c === 65279 && _bind$2 === 0 || (c === 32 || (c === 9 || (c === 10 || c === 13)))) {
+          break _L$2;
+        }
+        let v;
+        if (c >= 48 && c <= 57) {
+          v = c - 48 | 0;
+        } else {
+          if (c >= 65 && c <= 70) {
+            v = c - 55 | 0;
+          } else {
+            if (c >= 97 && c <= 102) {
+              v = c - 87 | 0;
+            } else {
+              return new _M0DTPC16result6ResultGzRP28FFTopOne10frametrail8HexErrorE3Err(new _M0TP28FFTopOne10frametrail8HexError(_bind$2, _bind$3, _bind$4, "invalid hex character"));
+            }
+          }
+        }
+        if (high < 0) {
+          high = v;
+          high_pos = pos;
+        } else {
+          _M0MPC15array5Array4pushGyE(out, ((Math.imul(high, 16) | 0) + v | 0) & 255);
+          high = -1;
+        }
+        break _L$2;
+      }
+      _tmp = _decoded_next_string_index;
+      continue;
+    } else {
+      break;
+    }
+  }
+  if (high >= 0) {
+    return new _M0DTPC16result6ResultGzRP28FFTopOne10frametrail8HexErrorE3Err(new _M0TP28FFTopOne10frametrail8HexError(high_pos._0, high_pos._1, high_pos._2, "odd number of hex digits"));
+  }
+  return new _M0DTPC16result6ResultGzRP28FFTopOne10frametrail8HexErrorE2Ok(_M0MPC15bytes5Bytes11from__array(new _M0TPB9ArrayViewGyE(out, 0, out.length)));
 }
 function _M0FP48FFTopOne10frametrail3cmd4main4fail(message) {
   const _bind = [{ _0: "error", _1: new _M0DTPB4Json6String(message) }];
@@ -1803,7 +1824,7 @@ function _M0FP48FFTopOne10frametrail3cmd4main13parse__option(args, index, fallba
   }
   const text = _M0MPC15array5Array2atGsE(args, index);
   if (text === "") {
-    return _M0FP48FFTopOne10frametrail3cmd4main13parse__optionN6constrS104;
+    return _M0FP48FFTopOne10frametrail3cmd4main13parse__optionN6constrS106;
   }
   let value = 0;
   const _bind = text.length;
@@ -1840,7 +1861,7 @@ function _M0FP48FFTopOne10frametrail3cmd4main13parse__option(args, index, fallba
       }
       const n = _decoded_char - 48 | 0;
       if (n < 0 || (n > 9 || value > ((2147483647 - n | 0) / 10 | 0))) {
-        return _M0FP48FFTopOne10frametrail3cmd4main13parse__optionN6constrS105;
+        return _M0FP48FFTopOne10frametrail3cmd4main13parse__optionN6constrS107;
       }
       value = (Math.imul(value, 10) | 0) + n | 0;
       _tmp = _decoded_next_string_index;
@@ -1892,12 +1913,12 @@ function _M0FP48FFTopOne10frametrail3cmd4main13parse__option(args, index, fallba
         break;
       }
     }
-    const _bind$3 = _M0FP017____moonbit__mainN7_2abindS70.length;
+    const _bind$3 = _M0FP017____moonbit__mainN7_2abindS71.length;
     let _tmp$2 = 0;
     while (true) {
       const _ = _tmp$2;
       if (_ < _bind$3) {
-        const b = _M0FP017____moonbit__mainN7_2abindS70[_];
+        const b = _M0FP017____moonbit__mainN7_2abindS71[_];
         _M0MPC15array5Array4pushGyE(bytes, b);
         _tmp$2 = _ + 1 | 0;
         continue;
@@ -1963,7 +1984,7 @@ function _M0FP48FFTopOne10frametrail3cmd4main13parse__option(args, index, fallba
   } else {
     source = _M0MPC15array5Array2atGsE(args, 1);
   }
-  const _bind = _M0FP28FFTopOne10frametrail10parse__hex(source);
+  const _bind = _M0FP28FFTopOne10frametrail20parse__hex__detailed(source);
   let data;
   if (_bind.$tag === 1) {
     const _Ok = _bind;
@@ -1971,7 +1992,12 @@ function _M0FP48FFTopOne10frametrail3cmd4main13parse__option(args, index, fallba
   } else {
     const _Err = _bind;
     const _e = _Err._0;
-    _M0FP48FFTopOne10frametrail3cmd4main4fail(_e);
+    const _p$3 = _e.message;
+    const _bind$2 = [{ _0: "error", _1: new _M0DTPB4Json6String(_p$3) }, { _0: "char_offset", _1: _M0IPC13int3IntPB6ToJson8to__json(_e.offset) }, { _0: "line", _1: _M0IPC13int3IntPB6ToJson8to__json(_e.line) }, { _0: "column", _1: _M0IPC13int3IntPB6ToJson8to__json(_e.column) }];
+    const _p$4 = _M0MPB3Map3MapGsRPB4JsonE(new _M0TPB9ArrayViewGUsRPB4JsonEE(_bind$2, 0, 4), undefined);
+    const diagnostic = new _M0DTPB4Json6Object(_p$4);
+    _M0FPB7printlnGsE(_M0MPC14json4Json17stringify_2einner(diagnostic, false, 0, undefined));
+    _M0FP48FFTopOne10frametrail3cmd4main9set__exit(2);
     return;
   }
   if (command === "encode") {

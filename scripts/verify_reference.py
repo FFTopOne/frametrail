@@ -79,6 +79,11 @@ def main():
         path = Path(directory) / 'device.hex'
         path.write_text(good.hex() + '\n', encoding='utf-8')
         assert json.loads(run('replay', str(path)))['stats']['frames'] == '1'
+        path.write_text('\ufeff' + good.hex() + '\n', encoding='utf-8')
+        assert json.loads(run('replay', str(path)))['stats']['frames'] == '1'
+        path.write_bytes(b'AA\n G0')
+        error = json.loads(run('replay', str(path), code=2))
+        assert (error['char_offset'], error['line'], error['column']) == (4, 2, 2)
         path.write_bytes(b'0' * (4194304 + 1))
         assert 'error' in json.loads(run('replay', str(path), code=2))
     assert 'FrameTrail' in run('help')

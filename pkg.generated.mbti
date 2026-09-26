@@ -20,6 +20,8 @@ pub fn max_frame_size(Int) -> Result[Int, String]
 
 pub fn parse_hex(String) -> Result[Bytes, String]
 
+pub fn parse_hex_detailed(String) -> Result[Bytes, HexError]
+
 pub fn replay(Bytes, chunk_size? : Int, max_encoded? : Int) -> Result[(Array[Event], Stats), String]
 
 pub fn to_hex(Bytes) -> String
@@ -57,6 +59,16 @@ pub fn Fault::code(Self) -> String
 pub fn Fault::equal(Self, Self) -> Bool
 pub fn Fault::not_equal(Self, Self) -> Bool
 pub fn Fault::to_repr(Self) -> @debug.Repr
+
+pub(all) struct HexError {
+  offset : Int
+  line : Int
+  column : Int
+  message : String
+} derive(Eq, @debug.Debug)
+pub fn HexError::equal(Self, Self) -> Bool
+pub fn HexError::not_equal(Self, Self) -> Bool
+pub fn HexError::to_repr(Self) -> @debug.Repr
 
 pub(all) struct Stats {
   bytes_in : Int64

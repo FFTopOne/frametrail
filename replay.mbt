@@ -1,37 +1,4 @@
 ///|
-/// Parse pairs of hex digits, ignoring ASCII whitespace. Rejects odd digits
-/// and all other characters rather than silently losing corrupt input.
-pub fn parse_hex(text : String) -> Result[Bytes, String] {
-  let out : Array[Byte] = []
-  let mut high = -1
-  for ch in text {
-    let c = ch.to_int()
-    if c == 32 || c == 9 || c == 10 || c == 13 {
-      continue
-    }
-    let v = if c >= 48 && c <= 57 {
-      c - 48
-    } else if c >= 65 && c <= 70 {
-      c - 55
-    } else if c >= 97 && c <= 102 {
-      c - 87
-    } else {
-      return Err("invalid hex character")
-    }
-    if high < 0 {
-      high = v
-    } else {
-      out.push((high * 16 + v).to_byte())
-      high = -1
-    }
-  }
-  if high >= 0 {
-    return Err("odd number of hex digits")
-  }
-  Ok(Bytes::from_array(out))
-}
-
-///|
 pub fn to_hex(data : Bytes) -> String {
   let digits = "0123456789ABCDEF"
   let out = StringBuilder()

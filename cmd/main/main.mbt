@@ -107,10 +107,17 @@ fn main {
   } else {
     args[1]
   }
-  let data = match @lib.parse_hex(source) {
+  let data = match @lib.parse_hex_detailed(source) {
     Ok(data) => data
     Err(e) => {
-      fail(e)
+      let diagnostic : Json = {
+        "error": e.message,
+        "char_offset": e.offset,
+        "line": e.line,
+        "column": e.column,
+      }
+      println(diagnostic.stringify())
+      set_exit(2)
       return
     }
   }
