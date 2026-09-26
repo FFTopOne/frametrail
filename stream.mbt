@@ -5,6 +5,7 @@ pub(all) enum Fault {
   ChecksumMismatch
   Oversize
   Truncated
+  TimedOut
 } derive(Eq, Debug)
 
 ///|
@@ -114,6 +115,27 @@ fn decode_packet(data : Bytes) -> Result[Bytes, Fault] {
     return Err(ChecksumMismatch)
   }
   Ok(payload)
+}
+
+///|
+/// Let a transport's idle timer abandon an incomplete packet without
+/// closing the session. Discard its remaining tail up to the next delimiter.
+/// No wall clock is read here; callers decide when their timeout has elapsed.
+pub fn Decoder::expire_partial(self : Decoder) -> Result[Event?, String] {
+  if self.feeding {
+    return Err("decoder is already feeding")
+  }
+  if self.closed {
+    return Err("decoder is closed")
+  }
+  if self.dropping || self.buffer.is_empty() {
+    return Ok(None)
+  }
+  let event = Rejected(start=self.start, end=self.offset, reason=TimedOut)
+  self.buffer.clear()
+  self.dropping = true
+  self.rejected = self.rejected + 1L
+  Ok(Some(event))
 }
 
 ///|

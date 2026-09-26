@@ -51,6 +51,7 @@ pub fn Fault::code(self : Fault) -> String {
     ChecksumMismatch => "CRC_MISMATCH"
     Oversize => "OVERSIZE"
     Truncated => "TRUNCATED"
+    TimedOut => "TIMED_OUT"
   }
 }
 

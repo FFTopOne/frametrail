@@ -29,6 +29,7 @@ pub fn to_hex(Bytes) -> String
 // Types and methods
 type Decoder
 pub fn Decoder::buffered(Self) -> Int
+pub fn Decoder::expire_partial(Self) -> Result[Event?, String]
 pub fn Decoder::feed(Self, Bytes) -> Result[Array[Event], String]
 pub fn Decoder::feed_each(Self, BytesView, (Event) -> Unit) -> Result[Unit, String]
 pub fn Decoder::finish(Self) -> Array[Event]
@@ -50,6 +51,7 @@ pub(all) enum Fault {
   ChecksumMismatch
   Oversize
   Truncated
+  TimedOut
 } derive(Eq, @debug.Debug)
 pub fn Fault::code(Self) -> String
 pub fn Fault::equal(Self, Self) -> Bool
