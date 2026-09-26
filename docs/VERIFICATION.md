@@ -1,6 +1,6 @@
 # 本地验证记录
 
-验证日期：2026-09-26。环境：Windows，Node.js v24.15.0。远程 GitHub CI 尚未运行。
+验证日期：2026-09-26。环境：Windows，Node.js v24.15.0。远程 GitHub CI 已通过，运行地址：https://github.com/FFTopOne/frametrail/actions/runs/36214085512 。验证源码提交：b1ff0cfeda8250e6b578532230c176fd2a5b3b43。下方为本地日志；远程步骤覆盖格式检查、双目标检查与测试、JS 发布构建和 Python 独立参考验证。
 
 ## moon info
 

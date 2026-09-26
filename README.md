@@ -90,7 +90,7 @@ python scripts/verify_reference.py
 
 核心库在 wasm-gc 和 js 目标上各通过 25 项测试。测试中还包括 1024 个确定性编解码生成样例、100 个任意字节流样例、56 次单比特载荷变异、所有切分点和长度边界。不是 1024 个独立测试用例，也未测试所有可能输入。
 
-CLI 仅支持 JS/Node.js，只有文件读取和退出码使用少量 JS FFI，编解码、状态机、参数处理和报告由 MoonBit 实现。未宣称 Native 目标或硬件平台已通过测试。GitHub Actions 配置已提供，但尚未在远程执行；CI 安装当前工具链并输出版本，后续需维护滚动编译器兼容性。
+CLI 仅支持 JS/Node.js，只有文件读取和退出码使用少量 JS FFI，编解码、状态机、参数处理和报告由 MoonBit 实现。未宣称 Native 目标或硬件平台已通过测试。GitHub Actions 已在 Ubuntu 上通过构建、格式检查、JS 与 wasm-gc 测试及独立参考检查：[首次验证记录](https://github.com/FFTopOne/frametrail/actions/runs/36214085512)。CI 安装当前工具链并输出版本，后续需维护滚动编译器兼容性。
 
 ## 目录
 
