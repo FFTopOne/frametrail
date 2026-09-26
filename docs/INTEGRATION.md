@@ -26,3 +26,6 @@
 `parse_hex_detailed` 返回包含 `offset`、`line`、`column` 和 `message` 的错误。
 offset 从 0 开始，行列从 1 开始，位置按 Unicode 标量计数，LF（包括 CRLF 中的 LF）换行。奇数位错误指向最后未配对的半字节。
 兼容 Windows 编辑器生成的单个开头 BOM；中途 BOM、非法字符仍会被拒绝。CLI 输入错误 JSON 同样包含这些位置信息。
+# 原始日志文件
+
+`node dist/frametrail.cjs replay-bin capture.bin 16 4096` 直接回放二进制采集文件，保留零字节及非 UTF-8 数据。输出结构和退出码与 `replay` 相同。两种文件入口只接受普通文件，最多读取 4 MiB 加一个探测字节；超过限制返回输入错误，不依赖读取前的文件大小检查。文本入口严格校验 UTF-8。CLI 仍会加载整个输入并保留全部事件，大量事件请使用核心 `feed_each` API。

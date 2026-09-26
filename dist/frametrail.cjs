@@ -224,13 +224,20 @@ function _M0TP28FFTopOne10frametrail8HexError(param0, param1, param2, param3) {
   this.column = param2;
   this.message = param3;
 }
-const _M0FP48FFTopOne10frametrail3cmd4main15read__hex__file = (path) => {
+const _M0FP48FFTopOne10frametrail3cmd4main10read__file = (path) => {
+   const fs = require('node:fs');
+   let fd;
    try {
-     const fs = require('node:fs');
-     if (!fs.statSync(path).isFile() || fs.statSync(path).size > 4194304) return undefined;
-     return fs.readFileSync(path, 'utf8');
+     fd = fs.openSync(path, fs.constants.O_RDONLY | (fs.constants.O_NONBLOCK || 0));
+     if (!fs.fstatSync(fd).isFile() || fs.fstatSync(fd).size > 4194304) return undefined;
+     const buffer = Buffer.alloc(4194305);
+     let size = 0, count;
+     while (size < buffer.length && (count = fs.readSync(fd, buffer, size, buffer.length - size, null)) > 0) size += count;
+     return size <= 4194304 ? new Uint8Array(buffer.subarray(0, size)) : undefined;
    } catch (_) { return undefined; }
+   finally { if (fd !== undefined) fs.closeSync(fd); }
  };
+const _M0FP48FFTopOne10frametrail3cmd4main10utf8__text = (data) => { try { return new TextDecoder('utf-8', {fatal: true, ignoreBOM: true}).decode(data); } catch (_) { return undefined; } };
 const _M0FP48FFTopOne10frametrail3cmd4main9set__exit = (code) => { process.exitCode = code; };
 const $bytes_literal$2 = new Uint8Array([84,69,77,80,61,50,51,46,53]);
 const $bytes_literal$3 = new Uint8Array([84,69,77,80,61,50,51,46,54]);
@@ -240,10 +247,10 @@ const _M0MPB4Iter4nextN6constrS9910GUsRPB4JsonEE = 0;
 const _M0MPB4Iter3newN6constrS9917GUsRPB4JsonEE = 0;
 const _M0FP28FFTopOne10frametrail7to__hexN6digitsS56 = "0123456789ABCDEF";
 const _M0MP28FFTopOne10frametrail7Decoder11new_2einnerN6constrS359 = new _M0DTPC16result6ResultGRP28FFTopOne10frametrail7DecodersE3Err("max_encoded must be in 1..1048576");
-const _M0FP017____moonbit__mainN7_2abindS71 = $bytes_literal$0;
+const _M0FP017____moonbit__mainN7_2abindS75 = $bytes_literal$0;
 const _M0FP28FFTopOne10frametrail20parse__hex__detailedN5tupleS374 = { _0: 0, _1: 1, _2: 1 };
-const _M0FP48FFTopOne10frametrail3cmd4main13parse__optionN6constrS106 = new _M0DTPC16result6ResultGisE3Err("options must be positive decimal integers");
-const _M0FP48FFTopOne10frametrail3cmd4main13parse__optionN6constrS107 = new _M0DTPC16result6ResultGisE3Err("options must be positive decimal integers within Int32 range");
+const _M0FP48FFTopOne10frametrail3cmd4main13parse__optionN6constrS120 = new _M0DTPC16result6ResultGisE3Err("options must be positive decimal integers");
+const _M0FP48FFTopOne10frametrail3cmd4main13parse__optionN6constrS121 = new _M0DTPC16result6ResultGisE3Err("options must be positive decimal integers within Int32 range");
 const _M0FPB4seed = _M0FPB12random__seed();
 const _M0FP28FFTopOne10frametrail12cobs__decodeN6constrS360 = new _M0DTPC16result6ResultGziE3Err(0);
 const _M0FP28FFTopOne10frametrail14decode__packetN6constrS361 = new _M0DTPC16result6ResultGzRP28FFTopOne10frametrail5FaultE3Err(0);
@@ -1824,7 +1831,7 @@ function _M0FP48FFTopOne10frametrail3cmd4main13parse__option(args, index, fallba
   }
   const text = _M0MPC15array5Array2atGsE(args, index);
   if (text === "") {
-    return _M0FP48FFTopOne10frametrail3cmd4main13parse__optionN6constrS106;
+    return _M0FP48FFTopOne10frametrail3cmd4main13parse__optionN6constrS120;
   }
   let value = 0;
   const _bind = text.length;
@@ -1861,7 +1868,7 @@ function _M0FP48FFTopOne10frametrail3cmd4main13parse__option(args, index, fallba
       }
       const n = _decoded_char - 48 | 0;
       if (n < 0 || (n > 9 || value > ((2147483647 - n | 0) / 10 | 0))) {
-        return _M0FP48FFTopOne10frametrail3cmd4main13parse__optionN6constrS107;
+        return _M0FP48FFTopOne10frametrail3cmd4main13parse__optionN6constrS121;
       }
       value = (Math.imul(value, 10) | 0) + n | 0;
       _tmp = _decoded_next_string_index;
@@ -1894,7 +1901,7 @@ function _M0FP48FFTopOne10frametrail3cmd4main13parse__option(args, index, fallba
     args = _p$2;
   }
   if (args.length === 0 || (_M0MPC15array5Array2atGsE(args, 0) === "help" || _M0MPC15array5Array2atGsE(args, 0) === "--help")) {
-    _M0FPB7printlnGsE("FrameTrail 0.1.0\nencode HEX\ndecode HEX [CHUNK_BYTES=16] [MAX_ENCODED=4096]\nreplay HEX_FILE [CHUNK_BYTES=16] [MAX_ENCODED=4096]\ndemo\nExit: 0 clean, 1 rejected frame, 2 input error. JSON offsets are zero-based, end-exclusive decimal strings.");
+    _M0FPB7printlnGsE("FrameTrail 0.1.0\nencode HEX\ndecode HEX [CHUNK_BYTES=16] [MAX_ENCODED=4096]\nreplay HEX_FILE [CHUNK_BYTES=16] [MAX_ENCODED=4096]\nreplay-bin BINARY_FILE [CHUNK_BYTES=16] [MAX_ENCODED=4096]\ndemo\nExit: 0 clean, 1 rejected frame, 2 input error. JSON offsets are zero-based, end-exclusive decimal strings.");
     return;
   }
   if (_M0MPC15array5Array2atGsE(args, 0) === "demo" && args.length === 1) {
@@ -1913,12 +1920,12 @@ function _M0FP48FFTopOne10frametrail3cmd4main13parse__option(args, index, fallba
         break;
       }
     }
-    const _bind$3 = _M0FP017____moonbit__mainN7_2abindS71.length;
+    const _bind$3 = _M0FP017____moonbit__mainN7_2abindS75.length;
     let _tmp$2 = 0;
     while (true) {
       const _ = _tmp$2;
       if (_ < _bind$3) {
-        const b = _M0FP017____moonbit__mainN7_2abindS71[_];
+        const b = _M0FP017____moonbit__mainN7_2abindS75[_];
         _M0MPC15array5Array4pushGyE(bytes, b);
         _tmp$2 = _ + 1 | 0;
         continue;
@@ -1954,8 +1961,15 @@ function _M0FP48FFTopOne10frametrail3cmd4main13parse__option(args, index, fallba
     let _tmp$2;
     const _p$3 = "decode";
     if (!(command === _p$3)) {
+      let _tmp$3;
       const _p$4 = "replay";
-      _tmp$2 = !(command === _p$4);
+      if (!(command === _p$4)) {
+        const _p$5 = "replay-bin";
+        _tmp$3 = !(command === _p$5);
+      } else {
+        _tmp$3 = false;
+      }
+      _tmp$2 = _tmp$3;
     } else {
       _tmp$2 = false;
     }
@@ -1971,30 +1985,72 @@ function _M0FP48FFTopOne10frametrail3cmd4main13parse__option(args, index, fallba
     _M0FP48FFTopOne10frametrail3cmd4main4fail("encode accepts exactly one hex string");
     return;
   }
+  const _bind = _M0FP48FFTopOne10frametrail3cmd4main13parse__option(args, 2, 16);
+  let chunk;
+  if (_bind.$tag === 1) {
+    const _Ok = _bind;
+    chunk = _Ok._0;
+  } else {
+    const _Err = _bind;
+    const _e = _Err._0;
+    _M0FP48FFTopOne10frametrail3cmd4main4fail(_e);
+    return;
+  }
+  const _bind$2 = _M0FP48FFTopOne10frametrail3cmd4main13parse__option(args, 3, 4096);
+  let limit;
+  if (_bind$2.$tag === 1) {
+    const _Ok = _bind$2;
+    limit = _Ok._0;
+  } else {
+    const _Err = _bind$2;
+    const _e = _Err._0;
+    _M0FP48FFTopOne10frametrail3cmd4main4fail(_e);
+    return;
+  }
+  if (command === "replay-bin") {
+    const _bind$3 = _M0FP48FFTopOne10frametrail3cmd4main10read__file(_M0MPC15array5Array2atGsE(args, 1));
+    if (_bind$3 === undefined) {
+      _M0FP48FFTopOne10frametrail3cmd4main4fail("cannot read regular binary file (limit 4 MiB)");
+    } else {
+      const _Some = _bind$3;
+      const _data = _Some;
+      _M0FP48FFTopOne10frametrail3cmd4main6report(_data, chunk, limit);
+    }
+    return;
+  }
   let source;
   if (command === "replay") {
-    const _bind = _M0FP48FFTopOne10frametrail3cmd4main15read__hex__file(_M0MPC15array5Array2atGsE(args, 1));
-    if (_bind === undefined) {
-      _M0FP48FFTopOne10frametrail3cmd4main4fail("cannot read regular UTF-8 hex file (limit 4 MiB)");
+    const _bind$3 = _M0FP48FFTopOne10frametrail3cmd4main10read__file(_M0MPC15array5Array2atGsE(args, 1));
+    let bytes;
+    if (_bind$3 === undefined) {
+      _M0FP48FFTopOne10frametrail3cmd4main4fail("cannot read regular hex file (limit 4 MiB)");
       return;
     } else {
-      const _Some = _bind;
+      const _Some = _bind$3;
+      bytes = _Some;
+    }
+    const _bind$4 = _M0FP48FFTopOne10frametrail3cmd4main10utf8__text(bytes);
+    if (_bind$4 === undefined) {
+      _M0FP48FFTopOne10frametrail3cmd4main4fail("hex file must contain valid UTF-8");
+      return;
+    } else {
+      const _Some = _bind$4;
       source = _Some;
     }
   } else {
     source = _M0MPC15array5Array2atGsE(args, 1);
   }
-  const _bind = _M0FP28FFTopOne10frametrail20parse__hex__detailed(source);
+  const _bind$3 = _M0FP28FFTopOne10frametrail20parse__hex__detailed(source);
   let data;
-  if (_bind.$tag === 1) {
-    const _Ok = _bind;
+  if (_bind$3.$tag === 1) {
+    const _Ok = _bind$3;
     data = _Ok._0;
   } else {
-    const _Err = _bind;
+    const _Err = _bind$3;
     const _e = _Err._0;
     const _p$3 = _e.message;
-    const _bind$2 = [{ _0: "error", _1: new _M0DTPB4Json6String(_p$3) }, { _0: "char_offset", _1: _M0IPC13int3IntPB6ToJson8to__json(_e.offset) }, { _0: "line", _1: _M0IPC13int3IntPB6ToJson8to__json(_e.line) }, { _0: "column", _1: _M0IPC13int3IntPB6ToJson8to__json(_e.column) }];
-    const _p$4 = _M0MPB3Map3MapGsRPB4JsonE(new _M0TPB9ArrayViewGUsRPB4JsonEE(_bind$2, 0, 4), undefined);
+    const _bind$4 = [{ _0: "error", _1: new _M0DTPB4Json6String(_p$3) }, { _0: "char_offset", _1: _M0IPC13int3IntPB6ToJson8to__json(_e.offset) }, { _0: "line", _1: _M0IPC13int3IntPB6ToJson8to__json(_e.line) }, { _0: "column", _1: _M0IPC13int3IntPB6ToJson8to__json(_e.column) }];
+    const _p$4 = _M0MPB3Map3MapGsRPB4JsonE(new _M0TPB9ArrayViewGUsRPB4JsonEE(_bind$4, 0, 4), undefined);
     const diagnostic = new _M0DTPB4Json6Object(_p$4);
     _M0FPB7printlnGsE(_M0MPC14json4Json17stringify_2einner(diagnostic, false, 0, undefined));
     _M0FP48FFTopOne10frametrail3cmd4main9set__exit(2);
@@ -2002,28 +2058,6 @@ function _M0FP48FFTopOne10frametrail3cmd4main13parse__option(args, index, fallba
   }
   if (command === "encode") {
     _M0FPB7printlnGsE(_M0FP28FFTopOne10frametrail7to__hex(_M0FP28FFTopOne10frametrail13encode__frame(data)));
-    return;
-  }
-  const _bind$2 = _M0FP48FFTopOne10frametrail3cmd4main13parse__option(args, 2, 16);
-  let chunk;
-  if (_bind$2.$tag === 1) {
-    const _Ok = _bind$2;
-    chunk = _Ok._0;
-  } else {
-    const _Err = _bind$2;
-    const _e = _Err._0;
-    _M0FP48FFTopOne10frametrail3cmd4main4fail(_e);
-    return;
-  }
-  const _bind$3 = _M0FP48FFTopOne10frametrail3cmd4main13parse__option(args, 3, 4096);
-  let limit;
-  if (_bind$3.$tag === 1) {
-    const _Ok = _bind$3;
-    limit = _Ok._0;
-  } else {
-    const _Err = _bind$3;
-    const _e = _Err._0;
-    _M0FP48FFTopOne10frametrail3cmd4main4fail(_e);
     return;
   }
   _M0FP48FFTopOne10frametrail3cmd4main6report(data, chunk, limit);

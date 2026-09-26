@@ -84,8 +84,20 @@ def main():
         path.write_bytes(b'AA\n G0')
         error = json.loads(run('replay', str(path), code=2))
         assert (error['char_offset'], error['line'], error['column']) == (4, 2, 2)
+        path.write_bytes(b'AA\r\n G0')
+        error = json.loads(run('replay', str(path), code=2))
+        assert (error['char_offset'], error['line'], error['column']) == (5, 2, 2)
+        binary = wire(bytes(range(256))) + mixed
+        path.write_bytes(binary)
+        assert json.loads(run('replay-bin', str(path), '3', code=1)) == json.loads(run('decode', binary.hex(), '17', code=1))
+        path.write_bytes(b'\xff')
+        assert json.loads(run('replay', str(path), code=2))['error'] == 'hex file must contain valid UTF-8'
+        path.write_bytes(b'')
+        assert json.loads(run('replay-bin', str(path)))['stats']['bytes_in'] == '0'
+        assert 'error' in json.loads(run('replay-bin', directory, code=2))
         path.write_bytes(b'0' * (4194304 + 1))
         assert 'error' in json.loads(run('replay', str(path), code=2))
+        assert 'error' in json.loads(run('replay-bin', str(path), code=2))
     assert 'FrameTrail' in run('help')
     print('PASS: 15 independent bidirectional wire vectors; CLI clean/corrupt/error exits; file I/O and size limit; chunk invariance.')
 

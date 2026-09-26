@@ -1,12 +1,22 @@
 ///|
-extern "js" fn read_hex_file(path : String) -> String? =
+extern "js" fn read_file(path : String) -> Bytes? =
   #| (path) => {
+  #|   const fs = require('node:fs');
+  #|   let fd;
   #|   try {
-  #|     const fs = require('node:fs');
-  #|     if (!fs.statSync(path).isFile() || fs.statSync(path).size > 4194304) return undefined;
-  #|     return fs.readFileSync(path, 'utf8');
+  #|     fd = fs.openSync(path, fs.constants.O_RDONLY | (fs.constants.O_NONBLOCK || 0));
+  #|     if (!fs.fstatSync(fd).isFile() || fs.fstatSync(fd).size > 4194304) return undefined;
+  #|     const buffer = Buffer.alloc(4194305);
+  #|     let size = 0, count;
+  #|     while (size < buffer.length && (count = fs.readSync(fd, buffer, size, buffer.length - size, null)) > 0) size += count;
+  #|     return size <= 4194304 ? new Uint8Array(buffer.subarray(0, size)) : undefined;
   #|   } catch (_) { return undefined; }
+  #|   finally { if (fd !== undefined) fs.closeSync(fd); }
   #| }
+
+///|
+extern "js" fn utf8_text(data : Bytes) -> String? =
+  #| (data) => { try { return new TextDecoder('utf-8', {fatal: true, ignoreBOM: true}).decode(data); } catch (_) { return undefined; } }
 
 ///|
 extern "js" fn set_exit(code : Int) -> Unit =
@@ -65,7 +75,7 @@ fn main {
   let args = Array::makei(argv.length() - 2, i => argv[i + 2])
   if args.length() == 0 || args[0] == "help" || args[0] == "--help" {
     println(
-      "FrameTrail 0.1.0\nencode HEX\ndecode HEX [CHUNK_BYTES=16] [MAX_ENCODED=4096]\nreplay HEX_FILE [CHUNK_BYTES=16] [MAX_ENCODED=4096]\ndemo\nExit: 0 clean, 1 rejected frame, 2 input error. JSON offsets are zero-based, end-exclusive decimal strings.",
+      "FrameTrail 0.1.0\nencode HEX\ndecode HEX [CHUNK_BYTES=16] [MAX_ENCODED=4096]\nreplay HEX_FILE [CHUNK_BYTES=16] [MAX_ENCODED=4096]\nreplay-bin BINARY_FILE [CHUNK_BYTES=16] [MAX_ENCODED=4096]\ndemo\nExit: 0 clean, 1 rejected frame, 2 input error. JSON offsets are zero-based, end-exclusive decimal strings.",
     )
     return
   }
@@ -88,7 +98,10 @@ fn main {
     return
   }
   let command = args[0]
-  if command != "encode" && command != "decode" && command != "replay" {
+  if command != "encode" &&
+    command != "decode" &&
+    command != "replay" &&
+    command != "replay-bin" {
     fail("unknown command; use help")
     return
   }
@@ -96,11 +109,39 @@ fn main {
     fail("encode accepts exactly one hex string")
     return
   }
+  let chunk = match parse_option(args, 2, 16) {
+    Ok(n) => n
+    Err(e) => {
+      fail(e)
+      return
+    }
+  }
+  let limit = match parse_option(args, 3, 4096) {
+    Ok(n) => n
+    Err(e) => {
+      fail(e)
+      return
+    }
+  }
+  if command == "replay-bin" {
+    match read_file(args[1]) {
+      Some(data) => report(data, chunk, limit)
+      None => fail("cannot read regular binary file (limit 4 MiB)")
+    }
+    return
+  }
   let source = if command == "replay" {
-    match read_hex_file(args[1]) {
+    let bytes = match read_file(args[1]) {
+      Some(data) => data
+      None => {
+        fail("cannot read regular hex file (limit 4 MiB)")
+        return
+      }
+    }
+    match utf8_text(bytes) {
       Some(text) => text
       None => {
-        fail("cannot read regular UTF-8 hex file (limit 4 MiB)")
+        fail("hex file must contain valid UTF-8")
         return
       }
     }
@@ -124,20 +165,6 @@ fn main {
   if command == "encode" {
     println(@lib.to_hex(@lib.encode_frame(data)))
     return
-  }
-  let chunk = match parse_option(args, 2, 16) {
-    Ok(n) => n
-    Err(e) => {
-      fail(e)
-      return
-    }
-  }
-  let limit = match parse_option(args, 3, 4096) {
-    Ok(n) => n
-    Err(e) => {
-      fail(e)
-      return
-    }
   }
   report(data, chunk, limit)
 }
