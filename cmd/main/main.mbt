@@ -46,6 +46,22 @@ fn report(data : Bytes, chunk : Int, limit : Int) -> Unit {
 }
 
 ///|
+fn report_summary(data : Bytes, chunk : Int, limit : Int) -> Unit {
+  match @lib.summarize(data, chunk_size=chunk, max_encoded=limit) {
+    Err(e) => fail(e)
+    Ok((stats, faults)) => {
+      let report : Json = {
+        "profile": "frametrail-cobs-crc16-v1",
+        "stats": stats.to_json(),
+        "fault_counts": faults.to_json(),
+      }
+      println(report.stringify(indent=2))
+      set_exit(if stats.rejected > 0L { 1 } else { 0 })
+    }
+  }
+}
+
+///|
 fn parse_option(
   args : Array[String],
   index : Int,
@@ -75,7 +91,7 @@ fn main {
   let args = Array::makei(argv.length() - 2, i => argv[i + 2])
   if args.length() == 0 || args[0] == "help" || args[0] == "--help" {
     println(
-      "FrameTrail 0.1.0\nencode HEX\ndecode HEX [CHUNK_BYTES=16] [MAX_ENCODED=4096]\nreplay HEX_FILE [CHUNK_BYTES=16] [MAX_ENCODED=4096]\nreplay-bin BINARY_FILE [CHUNK_BYTES=16] [MAX_ENCODED=4096]\ndemo\nExit: 0 clean, 1 rejected frame, 2 input error. JSON offsets are zero-based, end-exclusive decimal strings.",
+      "FrameTrail 0.1.0\nencode HEX\ndecode HEX [CHUNK_BYTES=16] [MAX_ENCODED=4096]\nreplay HEX_FILE [CHUNK_BYTES=16] [MAX_ENCODED=4096]\nreplay-bin BINARY_FILE [CHUNK_BYTES=16] [MAX_ENCODED=4096]\nsummarize HEX_FILE [CHUNK_BYTES=16] [MAX_ENCODED=4096]\ndemo\nExit: 0 clean, 1 rejected frame, 2 input error. JSON offsets are zero-based, end-exclusive decimal strings.",
     )
     return
   }
@@ -101,7 +117,8 @@ fn main {
   if command != "encode" &&
     command != "decode" &&
     command != "replay" &&
-    command != "replay-bin" {
+    command != "replay-bin" &&
+    command != "summarize" {
     fail("unknown command; use help")
     return
   }
@@ -130,7 +147,7 @@ fn main {
     }
     return
   }
-  let source = if command == "replay" {
+  let source = if command == "replay" || command == "summarize" {
     let bytes = match read_file(args[1]) {
       Some(data) => data
       None => {
@@ -166,5 +183,9 @@ fn main {
     println(@lib.to_hex(@lib.encode_frame(data)))
     return
   }
-  report(data, chunk, limit)
+  if command == "summarize" {
+    report_summary(data, chunk, limit)
+  } else {
+    report(data, chunk, limit)
+  }
 }

@@ -24,6 +24,8 @@ pub fn parse_hex_detailed(String) -> Result[Bytes, HexError]
 
 pub fn replay(Bytes, chunk_size? : Int, max_encoded? : Int) -> Result[(Array[Event], Stats), String]
 
+pub fn summarize(Bytes, chunk_size? : Int, max_encoded? : Int) -> Result[(Stats, Map[String, Int64]), String]
+
 pub fn to_hex(Bytes) -> String
 
 // Errors

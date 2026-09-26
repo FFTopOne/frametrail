@@ -77,7 +77,13 @@ def main():
         assert 'error' in json.loads(run(*args, code=2))
     with tempfile.TemporaryDirectory() as directory:
         path = Path(directory) / 'device.hex'
+        path.write_bytes(mixed.hex().encode('ascii'))
+        summary = json.loads(run('summarize', str(path), '1', code=1))
+        assert summary['stats'] == a['stats']
+        assert set(summary) == {'profile', 'stats', 'fault_counts'}
+        assert summary['fault_counts'] == {'MALFORMED_COBS': '1', 'CRC_MISMATCH': '1', 'TRUNCATED': '1', 'MISSING_CHECKSUM': '0', 'OVERSIZE': '0', 'TIMED_OUT': '0'}
         path.write_text(good.hex() + '\n', encoding='utf-8')
+        assert json.loads(run('summarize', str(path)))['stats']['frames'] == '1'
         assert json.loads(run('replay', str(path)))['stats']['frames'] == '1'
         path.write_text('\ufeff' + good.hex() + '\n', encoding='utf-8')
         assert json.loads(run('replay', str(path)))['stats']['frames'] == '1'
