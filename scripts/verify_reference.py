@@ -109,3 +109,5 @@ def main():
 
 if __name__ == '__main__':
     main()
+    from verify_stream_oracle import main as verify_streams
+    verify_streams()
