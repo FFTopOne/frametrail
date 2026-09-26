@@ -91,7 +91,7 @@ fn main {
   let args = Array::makei(argv.length() - 2, i => argv[i + 2])
   if args.length() == 0 || args[0] == "help" || args[0] == "--help" {
     println(
-      "FrameTrail 0.1.0\nencode HEX\ndecode HEX [CHUNK_BYTES=16] [MAX_ENCODED=4096]\nreplay HEX_FILE [CHUNK_BYTES=16] [MAX_ENCODED=4096]\nreplay-bin BINARY_FILE [CHUNK_BYTES=16] [MAX_ENCODED=4096]\nsummarize HEX_FILE [CHUNK_BYTES=16] [MAX_ENCODED=4096]\ndemo\nExit: 0 clean, 1 rejected frame, 2 input error. JSON offsets are zero-based, end-exclusive decimal strings.",
+      "FrameTrail 0.2.0\nencode HEX\ndecode HEX [CHUNK_BYTES=16] [MAX_ENCODED=4096]\nreplay HEX_FILE [CHUNK_BYTES=16] [MAX_ENCODED=4096]\nreplay-bin BINARY_FILE [CHUNK_BYTES=16] [MAX_ENCODED=4096]\nsummarize HEX_FILE [CHUNK_BYTES=16] [MAX_ENCODED=4096]\ndemo\nExit: 0 clean, 1 rejected frame, 2 input error. JSON offsets are zero-based, end-exclusive decimal strings.",
     )
     return
   }

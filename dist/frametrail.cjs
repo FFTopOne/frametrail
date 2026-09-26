@@ -2144,7 +2144,7 @@ function _M0FP48FFTopOne10frametrail3cmd4main13parse__option(args, index, fallba
     args = _p$2;
   }
   if (args.length === 0 || (_M0MPC15array5Array2atGsE(args, 0) === "help" || _M0MPC15array5Array2atGsE(args, 0) === "--help")) {
-    _M0FPB7printlnGsE("FrameTrail 0.1.0\nencode HEX\ndecode HEX [CHUNK_BYTES=16] [MAX_ENCODED=4096]\nreplay HEX_FILE [CHUNK_BYTES=16] [MAX_ENCODED=4096]\nreplay-bin BINARY_FILE [CHUNK_BYTES=16] [MAX_ENCODED=4096]\nsummarize HEX_FILE [CHUNK_BYTES=16] [MAX_ENCODED=4096]\ndemo\nExit: 0 clean, 1 rejected frame, 2 input error. JSON offsets are zero-based, end-exclusive decimal strings.");
+    _M0FPB7printlnGsE("FrameTrail 0.2.0\nencode HEX\ndecode HEX [CHUNK_BYTES=16] [MAX_ENCODED=4096]\nreplay HEX_FILE [CHUNK_BYTES=16] [MAX_ENCODED=4096]\nreplay-bin BINARY_FILE [CHUNK_BYTES=16] [MAX_ENCODED=4096]\nsummarize HEX_FILE [CHUNK_BYTES=16] [MAX_ENCODED=4096]\ndemo\nExit: 0 clean, 1 rejected frame, 2 input error. JSON offsets are zero-based, end-exclusive decimal strings.");
     return;
   }
   if (_M0MPC15array5Array2atGsE(args, 0) === "demo" && args.length === 1) {

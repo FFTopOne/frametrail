@@ -2,7 +2,11 @@ name: verify
 on: [push, pull_request]
 jobs:
   verify:
-    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -12,10 +16,19 @@ jobs:
         with:
           python-version: '3.12'
       - name: Install current MoonBit toolchain
+        if: runner.os != 'Windows'
+        shell: bash
         run: |
           curl -fsSL https://cli.moonbitlang.com/install/unix.sh -o /tmp/install-moon.sh
           bash /tmp/install-moon.sh
           echo "$HOME/.moon/bin" >> "$GITHUB_PATH"
+      - name: Install current MoonBit toolchain on Windows
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          Invoke-WebRequest https://cli.moonbitlang.com/install/powershell.ps1 -OutFile "$env:RUNNER_TEMP/install-moon.ps1"
+          & "$env:RUNNER_TEMP/install-moon.ps1"
+          "$env:USERPROFILE/.moon/bin" | Out-File -FilePath $env:GITHUB_PATH -Append -Encoding utf8
       - run: moon version --all
       - run: moon fmt --check
       - run: moon check --target wasm-gc --deny-warn
@@ -24,3 +37,9 @@ jobs:
       - run: moon test --target js --deny-warn
       - run: moon build --target js --release --deny-warn
       - run: python scripts/verify_reference.py
+      - run: python scripts/package_release.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: frametrail-${{ matrix.os }}
+          path: _build/release/*
+          if-no-files-found: error

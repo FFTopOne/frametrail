@@ -1,85 +1,13 @@
-# 本地验证记录
+# v0.2.0 验证记录
 
-验证日期：2026-09-26。环境：Windows，Node.js v24.15.0。远程 GitHub CI 已通过，运行地址：https://github.com/FFTopOne/frametrail/actions/runs/36214085512 。验证源码提交：b1ff0cfeda8250e6b578532230c176fd2a5b3b43。下方为本地日志；远程步骤覆盖格式检查、双目标检查与测试、JS 发布构建和 Python 独立参考验证。
+本地验证日期：2026-09-26；Windows，Node.js v24.15.0；MoonBit 版本见 `toolchain.txt`。
 
-## moon info
+- `moon info`、`moon fmt --check` 与双目标 `moon check --deny-warn`。
+- `moon test --target wasm-gc --deny-warn`：38/38。
+- `moon test --target js --deny-warn`：38/38。
+- JS release 构建，以及构建产物、分发 CLI 的真实进程测试。
+- Python 独立校验：15 组双向协议向量；文件错误、BOM、行列、二进制、汇总与退出码。
+- Python 数据流对照：固定种子 20260926，51 组流 × 3 种切块方式，比较完整 JSON；覆盖五类离线故障。实时超时另由 MoonBit 测试覆盖。
+- `package_release.py` 验证解压后校验和、版本与示例运行；相同输入重复打包 SHA-256 一致。
 
-退出码：0
-
-```text
-Finished. moon: ran 2 tasks, now up to date
-
-```
-
-## moon fmt
-
-退出码：0
-
-```text
-Finished. moon: ran 9 tasks, now up to date
-
-```
-
-## moon fmt --check
-
-退出码：0
-
-```text
-Finished. moon: ran 9 tasks, now up to date
-
-```
-
-## moon check --target wasm-gc --deny-warn
-
-退出码：0
-
-```text
-Finished. moon: ran 2 tasks, now up to date
-
-```
-
-## moon check --target js --deny-warn
-
-退出码：0
-
-```text
-Finished. moon: ran 4 tasks, now up to date
-
-```
-
-## moon test --target wasm-gc --deny-warn
-
-退出码：0
-
-```text
-Total tests: 25, passed: 25, failed: 0.
-
-```
-
-## moon test --target js --deny-warn
-
-退出码：0
-
-```text
-Total tests: 25, passed: 25, failed: 0.
-
-```
-
-## moon build --target js --release --deny-warn
-
-退出码：0
-
-```text
-Typescript declaration file is only supported for ESM format for now
-Finished. moon: ran 3 tasks, now up to date
-
-```
-
-## 独立参考与分发文件检查
-
-命令：`python scripts/verify_reference.py dist/frametrail.cjs`
-
-```text
-PASS: 15 independent bidirectional wire vectors; CLI clean/corrupt/error exits; file I/O and size limit; chunk invariance.
-
-```
+远程三平台结果以 [GitHub Actions](https://github.com/FFTopOne/frametrail/actions) 对应提交的执行记录为准。CI 使用滚动工具链，输出实际版本。测试使用合成数据，未做真实设备联调、性能基准或所有输入的穷尽检查。

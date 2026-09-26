@@ -1,10 +1,10 @@
 # FrameTrail 帧迹
 
-基于 MoonBit 的设备数据流分帧与故障诊断库。版本 0.1.0。
+基于 MoonBit 的设备数据流分帧与故障诊断库。版本 0.2.0。
 
 将接收侧任意切块的二进制流还原为经过 CRC 校验的载荷，并给出错误段的绝对字节位置。适合将自定义设备协议接入 MoonBit 应用、离线分析采集日志和编写通信回归测试。
 
-源码仓库：[https://github.com/FFTopOne/frametrail](https://github.com/FFTopOne/frametrail)。维护账号：FFTopOne。当前版本为可运行、已验证的 v0.1.0；尚未发布 Mooncakes 包或完成比赛报名。参赛方向：2026 年 9 月 MoonBit 黑客松新项目方向。
+源码仓库：[https://github.com/FFTopOne/frametrail](https://github.com/FFTopOne/frametrail)。维护账号：FFTopOne。当前版本为可运行、已验证的 v0.2.0；尚未发布 Mooncakes 包或完成比赛报名。参赛方向：2026 年 9 月 MoonBit 黑客松新项目方向。
 
 ## 五分钟运行
 
@@ -25,10 +25,12 @@ node dist/frametrail.cjs replay examples/mixed.hex 3
 encode HEX
 decode HEX [CHUNK_BYTES=16] [MAX_ENCODED=4096]
 replay HEX_FILE [CHUNK_BYTES=16] [MAX_ENCODED=4096]
+replay-bin BINARY_FILE [CHUNK_BYTES=16] [MAX_ENCODED=4096]
+summarize HEX_FILE [CHUNK_BYTES=16] [MAX_ENCODED=4096]
 demo
 ```
 
-退出码 0 表示无拒收帧，1 表示检测到拒收帧，2 表示输入、文件或参数错误。空流合法，返回 0。十六进制支持大小写和 ASCII 空白，不接受 `0x` 前缀、逗号或奇数位。回放文件须为不带 BOM 的 UTF-8 十六进制文本，最大 4 MiB。CLI 加载整个文件并汇总事件；大流应直接使用核心增量 API。
+退出码 0 表示无拒收帧，1 表示检测到拒收帧，2 表示输入、文件或参数错误。空流合法，返回 0。十六进制支持大小写和 ASCII 空白，不接受 `0x` 前缀、逗号或奇数位。文本回放接受 UTF-8 十六进制（可带单个起始 BOM），格式错误返回字符偏移及行列。`replay-bin` 接受原始二进制采集文件；文件入口均限制为 4 MiB。CLI 加载整个输入，`summarize` 仅保留统计，其他回放命令保留全部事件。大流应使用核心 `feed_each` API。
 
 ## 协议边界
 
@@ -44,8 +46,9 @@ COBS 和 CRC 是已有算法，本项目不声称算法原创。这里定义的�
 ## 核心能力
 
 - COBS 编码和严格解码，支持 254 字节连续非零边界及任意二进制载荷。
-- 任意块增量喂入、连续多帧解析和空分隔符计数。
-- 格式错误、缺少校验码、CRC 不匹配、帧超限、流截断五类错误。
+- 任意块增量喂入、连续多帧解析和空分隔符计数；支持逐事件回调。
+- 发送端容量上界估算与实际编码长度检查。
+- 格式错误、缺少校验码、CRC 不匹配、帧超限、流截断、调用方触发的半帧超时六类错误。
 - 超限后停止缓存，并在下一个零分隔符恢复接收。
 - 每个事件提供从 0 开始、左闭右开的流字节范围。
 - 十六进制回放和 JSON 报告；报告中的 Int64 偏移、累计计数使用十进制字符串，避免 JavaScript 数值精度丢失。
@@ -86,11 +89,11 @@ moon build --target js --release --deny-warn
 python scripts/verify_reference.py
 ```
 
-独立参考检查只用 Python 标准库和 Node.js。使用 Python `binascii.crc_hqx` 和独立的块式 COBS 实现交叉检查 15 组双向帧向量，并检查真实进程退出码、文件限制与切块一致性。测试数据均为合成数据。
+独立参考检查只用 Python 标准库和 Node.js。使用 Python `binascii.crc_hqx` 和独立的块式 COBS 实现交叉检查 15 组双向帧向量，并检查真实进程退出码、文件限制与切块一致性。另有 51 组固定种子数据流 × 3 种切块方式的独立 Python 对照测试，比较所有事件、偏移、载荷、统计和退出码，覆盖五类离线故障。测试数据均为合成数据。
 
-核心库在 wasm-gc 和 js 目标上各通过 25 项测试。测试中还包括 1024 个确定性编解码生成样例、100 个任意字节流样例、56 次单比特载荷变异、所有切分点和长度边界。不是 1024 个独立测试用例，也未测试所有可能输入。
+核心库在 wasm-gc 和 js 目标上各通过 38 项测试。测试中还包括 1024 个确定性编解码生成样例、100 个任意字节流样例、56 次单比特载荷变异、所有切分点和长度边界。不是 1024 个独立测试用例，也未测试所有可能输入。
 
-CLI 仅支持 JS/Node.js，只有文件读取和退出码使用少量 JS FFI，编解码、状态机、参数处理和报告由 MoonBit 实现。未宣称 Native 目标或硬件平台已通过测试。GitHub Actions 已在 Ubuntu 上通过构建、格式检查、JS 与 wasm-gc 测试及独立参考检查：[首次验证记录](https://github.com/FFTopOne/frametrail/actions/runs/36214085512)。CI 安装当前工具链并输出版本，后续需维护滚动编译器兼容性。
+CLI 仅支持 JS/Node.js，只有文件读取和退出码使用少量 JS FFI，编解码、状态机、参数处理和报告由 MoonBit 实现。未宣称 Native 目标或硬件平台已通过测试。GitHub Actions 配置 Ubuntu、Windows、macOS 三平台验证，并上传各平台验证过的 CLI 分发包。具体运行结果见 [Actions](https://github.com/FFTopOne/frametrail/actions)。CI 安装当前工具链并输出版本，后续需维护滚动编译器兼容性。
 
 ## 目录
 
@@ -98,7 +101,8 @@ CLI 仅支持 JS/Node.js，只有文件读取和退出码使用少量 JS FFI，�
 |---|---|
 | codec.mbt | COBS 与 CRC16、参考帧编码 |
 | stream.mbt | 有界增量状态机、错误和统计 |
-| replay.mbt | 严格十六进制、JSON 事件、离线回放 |
+| replay.mbt / hex.mbt / summary.mbt | JSON 事件、十六进制诊断、回放与汇总 |
+| sender.mbt | 发送端容量估算与限制检查 |
 | cmd/main | CLI 和最小文件系统适配 |
 | codec_test.mbt / stream_test.mbt | 黑盒测试与确定性生成检查 |
 | scripts/verify_reference.py | 独立参考与真实进程检查 |
@@ -106,11 +110,15 @@ CLI 仅支持 JS/Node.js，只有文件读取和退出码使用少量 JS FFI，�
 | dist/frametrail.cjs | MoonBit 生成的 JS 演示程序 |
 | docs | 设计、测试记录和演示讲稿 |
 
+## 构建分发包
+
+运行 `moon build --target js --release --deny-warn` 后执行 `python scripts/package_release.py`，生成 `_build/release/frametrail-0.2.0.zip` 及 SHA-256 文件。包内包含 CLI、示例、许可证和文件校验清单；打包脚本会解压到临时目录，核对校验和并实际运行干净与损坏日志。固定 ZIP 元数据使相同输入在同一压缩实现下可重复打包。集成用法见 [INTEGRATION.md](docs/INTEGRATION.md)。
+
 ## 当前限制
 
 尚未实现串口驱动、蓝牙连接、GUI、时间戳采集、重传和真实设备联调。载荷作为字节串交给调用方，不解释温度或传感器字段。
 
-只有遇到分隔符才能重新定位下一段；丢失分隔符可能导致多个原始帧一起被拒收，不能承诺恢复所有损坏数据。超限事件的 end 是首次超过限制的位置，不是整段丢弃数据的终点。没有分隔符的半帧将在 `finish` 时被拒收；长期连接的超时策略由调用方决定。
+只有遇到分隔符才能重新定位下一段；丢失分隔符可能导致多个原始帧一起被拒收，不能承诺恢复所有损坏数据。超限事件的 end 是首次超过限制的位置，不是整段丢弃数据的终点。没有分隔符的半帧将在 `finish` 时被拒收；长期连接可由调用方在超时后调用 `expire_partial()`，记录一次错误并丢弃尾部直到下个分隔符。库本身不读取时钟。
 
 ## 许可证和来源
 
