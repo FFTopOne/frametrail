@@ -54,6 +54,7 @@ struct Decoder {
   mut start : Int64
   mut dropping : Bool
   mut closed : Bool
+  mut feeding : Bool
   mut frames : Int64
   mut rejected : Int64
   mut empty_delimiters : Int64
@@ -73,6 +74,7 @@ pub fn Decoder::new(max_encoded? : Int = 4096) -> Result[Decoder, String] {
     start: 0L,
     dropping: false,
     closed: false,
+    feeding: false,
     frames: 0L,
     rejected: 0L,
     empty_delimiters: 0L,
@@ -121,11 +123,31 @@ pub fn Decoder::feed(
   self : Decoder,
   chunk : Bytes,
 ) -> Result[Array[Event], String] {
+  let events : Array[Event] = []
+  match self.feed_each(chunk[:], event => events.push(event)) {
+    Err(e) => Err(e)
+    Ok(_) => Ok(events)
+  }
+}
+
+///|
+/// Deliver events as they are decoded without accumulating an output array.
+/// The caller owns any events it retains. Reentrant feed calls are rejected;
+/// finish invoked from a callback is a no-op. Callbacks must not panic.
+pub fn Decoder::feed_each(
+  self : Decoder,
+  chunk : BytesView,
+  emit : (Event) -> Unit,
+) -> Result[Unit, String] {
+  if self.feeding {
+    return Err("decoder is already feeding")
+  }
   if self.closed {
     return Err("decoder is closed")
   }
-  let events : Array[Event] = []
+  self.feeding = true
   for byte in chunk {
+    let mut pending : Event? = None
     self.offset = self.offset + 1L
     if byte == 0 {
       if self.dropping {
@@ -135,11 +157,11 @@ pub fn Decoder::feed(
       } else {
         match decode_packet(Bytes::from_array(self.buffer)) {
           Ok(payload) => {
-            events.push(Frame(start=self.start, end=self.offset, payload~))
+            pending = Some(Frame(start=self.start, end=self.offset, payload~))
             self.frames = self.frames + 1L
           }
           Err(reason) => {
-            events.push(Rejected(start=self.start, end=self.offset, reason~))
+            pending = Some(Rejected(start=self.start, end=self.offset, reason~))
             self.rejected = self.rejected + 1L
           }
         }
@@ -149,7 +171,7 @@ pub fn Decoder::feed(
     } else if !self.dropping {
       if self.buffer.length() == self.max_encoded {
         // Report once, on the first excess byte; do not retain that byte.
-        events.push(
+        pending = Some(
           Rejected(start=self.start, end=self.offset, reason=Oversize),
         )
         self.rejected = self.rejected + 1L
@@ -162,15 +184,19 @@ pub fn Decoder::feed(
         }
       }
     }
+    if pending is Some(event) {
+      emit(event)
+    }
   }
-  Ok(events)
+  self.feeding = false
+  Ok(())
 }
 
 ///|
 /// Seal a stream. A remaining partial packet is rejected once.
 /// An oversize packet was already reported; finish does not double-count it.
 pub fn Decoder::finish(self : Decoder) -> Array[Event] {
-  if self.closed {
+  if self.closed || self.feeding {
     return []
   }
   self.closed = true

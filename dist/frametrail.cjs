@@ -39,14 +39,14 @@ function _M0DTPC16result6ResultGzRP28FFTopOne10frametrail5FaultE2Ok(param0) {
   this._0 = param0;
 }
 _M0DTPC16result6ResultGzRP28FFTopOne10frametrail5FaultE2Ok.prototype.$tag = 1;
-function _M0DTPC16result6ResultGRPB5ArrayGRP28FFTopOne10frametrail5EventEsE3Err(param0) {
+function _M0DTPC16result6ResultGusE3Err(param0) {
   this._0 = param0;
 }
-_M0DTPC16result6ResultGRPB5ArrayGRP28FFTopOne10frametrail5EventEsE3Err.prototype.$tag = 0;
-function _M0DTPC16result6ResultGRPB5ArrayGRP28FFTopOne10frametrail5EventEsE2Ok(param0) {
+_M0DTPC16result6ResultGusE3Err.prototype.$tag = 0;
+function _M0DTPC16result6ResultGusE2Ok(param0) {
   this._0 = param0;
 }
-_M0DTPC16result6ResultGRPB5ArrayGRP28FFTopOne10frametrail5EventEsE2Ok.prototype.$tag = 1;
+_M0DTPC16result6ResultGusE2Ok.prototype.$tag = 1;
 function _M0DTPC16result6ResultGURPB5ArrayGRP28FFTopOne10frametrail5EventERP28FFTopOne10frametrail5StatsEsE3Err(param0) {
   this._0 = param0;
 }
@@ -173,17 +173,18 @@ function _M0TPB9ArrayViewGUsRPB4JsonEE(param0, param1, param2) {
   this.start = param1;
   this.end = param2;
 }
-function _M0TP28FFTopOne10frametrail7Decoder(param0, param1, param2, param3, param4, param5, param6, param7, param8, param9) {
+function _M0TP28FFTopOne10frametrail7Decoder(param0, param1, param2, param3, param4, param5, param6, param7, param8, param9, param10) {
   this.max_encoded = param0;
   this.buffer = param1;
   this.offset = param2;
   this.start = param3;
   this.dropping = param4;
   this.closed = param5;
-  this.frames = param6;
-  this.rejected = param7;
-  this.empty_delimiters = param8;
-  this.peak = param9;
+  this.feeding = param6;
+  this.frames = param7;
+  this.rejected = param8;
+  this.empty_delimiters = param9;
+  this.peak = param10;
 }
 function _M0TP28FFTopOne10frametrail5Stats(param0, param1, param2, param3, param4) {
   this.bytes_in = param0;
@@ -209,6 +210,14 @@ function _M0DTP28FFTopOne10frametrail5Event8Rejected(param0, param1, param2) {
   this._2 = param2;
 }
 _M0DTP28FFTopOne10frametrail5Event8Rejected.prototype.$tag = 1;
+function _M0DTPC16result6ResultGRPB5ArrayGRP28FFTopOne10frametrail5EventEsE3Err(param0) {
+  this._0 = param0;
+}
+_M0DTPC16result6ResultGRPB5ArrayGRP28FFTopOne10frametrail5EventEsE3Err.prototype.$tag = 0;
+function _M0DTPC16result6ResultGRPB5ArrayGRP28FFTopOne10frametrail5EventEsE2Ok(param0) {
+  this._0 = param0;
+}
+_M0DTPC16result6ResultGRPB5ArrayGRP28FFTopOne10frametrail5EventEsE2Ok.prototype.$tag = 1;
 const _M0FP48FFTopOne10frametrail3cmd4main15read__hex__file = (path) => {
    try {
      const fs = require('node:fs');
@@ -224,19 +233,20 @@ const _M0MPB4Iter4nextN6constrS9909GUsRPB4JsonEE = 0;
 const _M0MPB4Iter4nextN6constrS9910GUsRPB4JsonEE = 0;
 const _M0MPB4Iter3newN6constrS9917GUsRPB4JsonEE = 0;
 const _M0FP28FFTopOne10frametrail7to__hexN6digitsS42 = "0123456789ABCDEF";
-const _M0MP28FFTopOne10frametrail7Decoder11new_2einnerN6constrS306 = new _M0DTPC16result6ResultGRP28FFTopOne10frametrail7DecodersE3Err("max_encoded must be in 1..1048576");
+const _M0MP28FFTopOne10frametrail7Decoder11new_2einnerN6constrS325 = new _M0DTPC16result6ResultGRP28FFTopOne10frametrail7DecodersE3Err("max_encoded must be in 1..1048576");
 const _M0FP017____moonbit__mainN7_2abindS70 = $bytes_literal$0;
 const _M0FP48FFTopOne10frametrail3cmd4main13parse__optionN6constrS104 = new _M0DTPC16result6ResultGisE3Err("options must be positive decimal integers");
 const _M0FP48FFTopOne10frametrail3cmd4main13parse__optionN6constrS105 = new _M0DTPC16result6ResultGisE3Err("options must be positive decimal integers within Int32 range");
-const _M0FP28FFTopOne10frametrail10parse__hexN6constrS317 = new _M0DTPC16result6ResultGzsE3Err("invalid hex character");
-const _M0FP28FFTopOne10frametrail10parse__hexN6constrS318 = new _M0DTPC16result6ResultGzsE3Err("odd number of hex digits");
+const _M0FP28FFTopOne10frametrail10parse__hexN6constrS337 = new _M0DTPC16result6ResultGzsE3Err("invalid hex character");
+const _M0FP28FFTopOne10frametrail10parse__hexN6constrS338 = new _M0DTPC16result6ResultGzsE3Err("odd number of hex digits");
 const _M0FPB4seed = _M0FPB12random__seed();
-const _M0FP28FFTopOne10frametrail12cobs__decodeN6constrS307 = new _M0DTPC16result6ResultGziE3Err(0);
-const _M0FP28FFTopOne10frametrail14decode__packetN6constrS308 = new _M0DTPC16result6ResultGzRP28FFTopOne10frametrail5FaultE3Err(0);
-const _M0FP28FFTopOne10frametrail14decode__packetN6constrS309 = new _M0DTPC16result6ResultGzRP28FFTopOne10frametrail5FaultE3Err(1);
-const _M0FP28FFTopOne10frametrail14decode__packetN6constrS310 = new _M0DTPC16result6ResultGzRP28FFTopOne10frametrail5FaultE3Err(2);
-const _M0MP28FFTopOne10frametrail7Decoder4feedN6constrS311 = new _M0DTPC16result6ResultGRPB5ArrayGRP28FFTopOne10frametrail5EventEsE3Err("decoder is closed");
-const _M0FP28FFTopOne10frametrail14replay_2einnerN6constrS319 = new _M0DTPC16result6ResultGURPB5ArrayGRP28FFTopOne10frametrail5EventERP28FFTopOne10frametrail5StatsEsE3Err("chunk_size must be positive");
+const _M0FP28FFTopOne10frametrail12cobs__decodeN6constrS326 = new _M0DTPC16result6ResultGziE3Err(0);
+const _M0FP28FFTopOne10frametrail14decode__packetN6constrS327 = new _M0DTPC16result6ResultGzRP28FFTopOne10frametrail5FaultE3Err(0);
+const _M0FP28FFTopOne10frametrail14decode__packetN6constrS328 = new _M0DTPC16result6ResultGzRP28FFTopOne10frametrail5FaultE3Err(1);
+const _M0FP28FFTopOne10frametrail14decode__packetN6constrS329 = new _M0DTPC16result6ResultGzRP28FFTopOne10frametrail5FaultE3Err(2);
+const _M0MP28FFTopOne10frametrail7Decoder10feed__eachN6constrS330 = new _M0DTPC16result6ResultGusE3Err("decoder is already feeding");
+const _M0MP28FFTopOne10frametrail7Decoder10feed__eachN6constrS331 = new _M0DTPC16result6ResultGusE3Err("decoder is closed");
+const _M0FP28FFTopOne10frametrail14replay_2einnerN6constrS339 = new _M0DTPC16result6ResultGURPB5ArrayGRP28FFTopOne10frametrail5EventERP28FFTopOne10frametrail5StatsEsE3Err("chunk_size must be positive");
 function _M0FPB13consume4__acc(acc, input) {
   const _p = (acc >>> 0) + ((Math.imul(input, -1028477379) | 0) >>> 0) | 0;
   const _p$2 = 17;
@@ -1236,28 +1246,28 @@ function _M0MPC14json4Json17stringify_2einner(self, escape_slash, indent, replac
   }
   return buf.val;
 }
-function _M0IP28FFTopOne10frametrail5StatsPB6ToJson8to__json(_x_81) {
+function _M0IP28FFTopOne10frametrail5StatsPB6ToJson8to__json(_x_88) {
   const _bind = [];
   const $36$map = _M0MPB3Map3MapGsRPB4JsonE(new _M0TPB9ArrayViewGUsRPB4JsonEE(_bind, 0, 0), undefined);
-  _M0MPB3Map3setGsRPB4JsonE($36$map, "bytes_in", _M0IPC15int645Int64PB6ToJson8to__json(_x_81.bytes_in));
-  _M0MPB3Map3setGsRPB4JsonE($36$map, "frames", _M0IPC15int645Int64PB6ToJson8to__json(_x_81.frames));
-  _M0MPB3Map3setGsRPB4JsonE($36$map, "rejected", _M0IPC15int645Int64PB6ToJson8to__json(_x_81.rejected));
-  _M0MPB3Map3setGsRPB4JsonE($36$map, "empty_delimiters", _M0IPC15int645Int64PB6ToJson8to__json(_x_81.empty_delimiters));
-  _M0MPB3Map3setGsRPB4JsonE($36$map, "peak_buffered", _M0IPC13int3IntPB6ToJson8to__json(_x_81.peak_buffered));
+  _M0MPB3Map3setGsRPB4JsonE($36$map, "bytes_in", _M0IPC15int645Int64PB6ToJson8to__json(_x_88.bytes_in));
+  _M0MPB3Map3setGsRPB4JsonE($36$map, "frames", _M0IPC15int645Int64PB6ToJson8to__json(_x_88.frames));
+  _M0MPB3Map3setGsRPB4JsonE($36$map, "rejected", _M0IPC15int645Int64PB6ToJson8to__json(_x_88.rejected));
+  _M0MPB3Map3setGsRPB4JsonE($36$map, "empty_delimiters", _M0IPC15int645Int64PB6ToJson8to__json(_x_88.empty_delimiters));
+  _M0MPB3Map3setGsRPB4JsonE($36$map, "peak_buffered", _M0IPC13int3IntPB6ToJson8to__json(_x_88.peak_buffered));
   return new _M0DTPB4Json6Object($36$map);
 }
 function _M0MP28FFTopOne10frametrail7Decoder11new_2einner(max_encoded) {
   if (max_encoded < 1 || max_encoded > 1048576) {
-    return _M0MP28FFTopOne10frametrail7Decoder11new_2einnerN6constrS306;
+    return _M0MP28FFTopOne10frametrail7Decoder11new_2einnerN6constrS325;
   }
-  return new _M0DTPC16result6ResultGRP28FFTopOne10frametrail7DecodersE2Ok(new _M0TP28FFTopOne10frametrail7Decoder(max_encoded, [], 0n, 0n, false, false, 0n, 0n, 0n, 0));
+  return new _M0DTPC16result6ResultGRP28FFTopOne10frametrail7DecodersE2Ok(new _M0TP28FFTopOne10frametrail7Decoder(max_encoded, [], 0n, 0n, false, false, false, 0n, 0n, 0n, 0));
 }
 function _M0MP28FFTopOne10frametrail7Decoder5stats(self) {
   return new _M0TP28FFTopOne10frametrail5Stats(self.offset, self.frames, self.rejected, self.empty_delimiters, self.peak);
 }
 function _M0FP28FFTopOne10frametrail12cobs__decode(data) {
   if (data.length === 0) {
-    return _M0FP28FFTopOne10frametrail12cobs__decodeN6constrS307;
+    return _M0FP28FFTopOne10frametrail12cobs__decodeN6constrS326;
   }
   const out = [];
   let i = 0;
@@ -1337,11 +1347,11 @@ function _M0FP28FFTopOne10frametrail14decode__packet(data) {
     const _Ok = _bind;
     raw = _Ok._0;
   } else {
-    return _M0FP28FFTopOne10frametrail14decode__packetN6constrS308;
+    return _M0FP28FFTopOne10frametrail14decode__packetN6constrS327;
   }
   const n = raw.length;
   if (n < 2) {
-    return _M0FP28FFTopOne10frametrail14decode__packetN6constrS309;
+    return _M0FP28FFTopOne10frametrail14decode__packetN6constrS328;
   }
   const payload = _M0MPC15bytes9BytesView9to__owned(_M0MPC15bytes5Bytes21clamped__view_2einner(raw, 0, n - 2 | 0));
   const _tmp = n - 2 | 0;
@@ -1349,21 +1359,25 @@ function _M0FP28FFTopOne10frametrail14decode__packet(data) {
   const _tmp$3 = n - 1 | 0;
   const expected = _tmp$2 | (_tmp$3 >>> 0 < raw.length ? raw[_tmp$3] : $oob());
   if (_M0FP28FFTopOne10frametrail5crc16(payload) !== expected) {
-    return _M0FP28FFTopOne10frametrail14decode__packetN6constrS310;
+    return _M0FP28FFTopOne10frametrail14decode__packetN6constrS329;
   }
   return new _M0DTPC16result6ResultGzRP28FFTopOne10frametrail5FaultE2Ok(payload);
 }
-function _M0MP28FFTopOne10frametrail7Decoder4feed(self, chunk) {
-  if (self.closed) {
-    return _M0MP28FFTopOne10frametrail7Decoder4feedN6constrS311;
+function _M0MP28FFTopOne10frametrail7Decoder10feed__each(self, chunk, emit) {
+  if (self.feeding) {
+    return _M0MP28FFTopOne10frametrail7Decoder10feed__eachN6constrS330;
   }
-  const events = [];
-  const _bind = chunk.length;
+  if (self.closed) {
+    return _M0MP28FFTopOne10frametrail7Decoder10feed__eachN6constrS331;
+  }
+  self.feeding = true;
+  const _bind = chunk.end - chunk.start | 0;
   let _tmp = 0;
   while (true) {
     const _ = _tmp;
     if (_ < _bind) {
-      const byte = chunk[_];
+      const byte = chunk.buf[chunk.start + _ | 0];
+      let pending = undefined;
       self.offset = BigInt.asUintN(64, self.offset + 1n);
       const _p = 0;
       if (byte === _p) {
@@ -1379,12 +1393,12 @@ function _M0MP28FFTopOne10frametrail7Decoder4feed(self, chunk) {
             if (_bind$3.$tag === 1) {
               const _Ok = _bind$3;
               const _payload = _Ok._0;
-              _M0MPC15array5Array4pushGRP28FFTopOne10frametrail5EventE(events, new _M0DTP28FFTopOne10frametrail5Event5Frame(self.start, self.offset, _payload));
+              pending = new _M0DTP28FFTopOne10frametrail5Event5Frame(self.start, self.offset, _payload);
               self.frames = BigInt.asUintN(64, self.frames + 1n);
             } else {
               const _Err = _bind$3;
               const _reason = _Err._0;
-              _M0MPC15array5Array4pushGRP28FFTopOne10frametrail5EventE(events, new _M0DTP28FFTopOne10frametrail5Event8Rejected(self.start, self.offset, _reason));
+              pending = new _M0DTP28FFTopOne10frametrail5Event8Rejected(self.start, self.offset, _reason);
               self.rejected = BigInt.asUintN(64, self.rejected + 1n);
             }
           }
@@ -1394,7 +1408,7 @@ function _M0MP28FFTopOne10frametrail7Decoder4feed(self, chunk) {
       } else {
         if (!self.dropping) {
           if (self.buffer.length === self.max_encoded) {
-            _M0MPC15array5Array4pushGRP28FFTopOne10frametrail5EventE(events, new _M0DTP28FFTopOne10frametrail5Event8Rejected(self.start, self.offset, 3));
+            pending = new _M0DTP28FFTopOne10frametrail5Event8Rejected(self.start, self.offset, 3);
             self.rejected = BigInt.asUintN(64, self.rejected + 1n);
             _M0MPC15array5Array5clearGyE(self.buffer);
             self.dropping = true;
@@ -1406,16 +1420,37 @@ function _M0MP28FFTopOne10frametrail7Decoder4feed(self, chunk) {
           }
         }
       }
+      const _bind$2 = pending;
+      if (_bind$2 === undefined) {
+      } else {
+        const _Some = _bind$2;
+        const _event = _Some;
+        emit(_event);
+      }
       _tmp = _ + 1 | 0;
       continue;
     } else {
       break;
     }
   }
-  return new _M0DTPC16result6ResultGRPB5ArrayGRP28FFTopOne10frametrail5EventEsE2Ok(events);
+  self.feeding = false;
+  return new _M0DTPC16result6ResultGusE2Ok(undefined);
+}
+function _M0MP28FFTopOne10frametrail7Decoder4feed(self, chunk) {
+  const events = [];
+  const _bind = _M0MP28FFTopOne10frametrail7Decoder10feed__each(self, new _M0TPC15bytes9BytesView(chunk, 0, chunk.length), (event) => {
+    _M0MPC15array5Array4pushGRP28FFTopOne10frametrail5EventE(events, event);
+  });
+  if (_bind.$tag === 0) {
+    const _Err = _bind;
+    const _e = _Err._0;
+    return new _M0DTPC16result6ResultGRPB5ArrayGRP28FFTopOne10frametrail5EventEsE3Err(_e);
+  } else {
+    return new _M0DTPC16result6ResultGRPB5ArrayGRP28FFTopOne10frametrail5EventEsE2Ok(events);
+  }
 }
 function _M0MP28FFTopOne10frametrail7Decoder6finish(self) {
-  if (self.closed) {
+  if (self.closed || self.feeding) {
     return [];
   }
   self.closed = true;
@@ -1555,7 +1590,7 @@ function _M0FP28FFTopOne10frametrail10parse__hex(text) {
             if (c >= 97 && c <= 102) {
               v = c - 87 | 0;
             } else {
-              return _M0FP28FFTopOne10frametrail10parse__hexN6constrS317;
+              return _M0FP28FFTopOne10frametrail10parse__hexN6constrS337;
             }
           }
         }
@@ -1574,7 +1609,7 @@ function _M0FP28FFTopOne10frametrail10parse__hex(text) {
     }
   }
   if (high >= 0) {
-    return _M0FP28FFTopOne10frametrail10parse__hexN6constrS318;
+    return _M0FP28FFTopOne10frametrail10parse__hexN6constrS338;
   }
   return new _M0DTPC16result6ResultGzsE2Ok(_M0MPC15bytes5Bytes11from__array(new _M0TPB9ArrayViewGyE(out, 0, out.length)));
 }
@@ -1655,7 +1690,7 @@ function _M0MP28FFTopOne10frametrail5Event8as__json(self) {
 }
 function _M0FP28FFTopOne10frametrail14replay_2einner(data, chunk_size, max_encoded) {
   if (chunk_size < 1) {
-    return _M0FP28FFTopOne10frametrail14replay_2einnerN6constrS319;
+    return _M0FP28FFTopOne10frametrail14replay_2einnerN6constrS339;
   }
   const _bind = _M0MP28FFTopOne10frametrail7Decoder11new_2einner(max_encoded);
   let decoder;

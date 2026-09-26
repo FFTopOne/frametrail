@@ -30,6 +30,7 @@ pub fn to_hex(Bytes) -> String
 type Decoder
 pub fn Decoder::buffered(Self) -> Int
 pub fn Decoder::feed(Self, Bytes) -> Result[Array[Event], String]
+pub fn Decoder::feed_each(Self, BytesView, (Event) -> Unit) -> Result[Unit, String]
 pub fn Decoder::finish(Self) -> Array[Event]
 pub fn Decoder::new(max_encoded? : Int) -> Result[Self, String]
 pub fn Decoder::stats(Self) -> Stats
